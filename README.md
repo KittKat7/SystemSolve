@@ -2,7 +2,7 @@
 # Add Your Team Name Here
 
 Team Members
-* Member 1
+* Avery Bowen
 * Member 2
 * Member 3
 * Member 4
