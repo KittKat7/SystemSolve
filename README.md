@@ -3,7 +3,7 @@
 
 Team Members
 * Avery Bowen
-* Member 2
+* Daniel Ward
 * Member 3
 * Member 4
 
