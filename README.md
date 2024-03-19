@@ -4,7 +4,7 @@
 Team Members
 * Avery Bowen
 * Daniel Ward
-* Member 3
+* Gwendolyn Lockamy
 * Member 4
 
 # Project Description
