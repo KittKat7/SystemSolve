@@ -1,11 +1,11 @@
-# Add Your Project Name Here
-# Add Your Team Name Here
+# Code Quest
 
-Team Members
+## Team Members
+
 * Avery Bowen
 * Daniel Ward
 * Gwendolyn Lockamy
 
-# Project Description
+## Description
 
-Add a brief description here.
+Code Quest is a puzzle solving game designed to teach programming logic.
