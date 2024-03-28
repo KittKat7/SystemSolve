@@ -7,19 +7,19 @@ import java.awt.image.BufferedImage;
  */
 public class wallObj extends GameObject {
 
-    /*
-     * Constructor for wallObj
-     */
-    public wallObj(){
-        super(true);
-        super.image = this.getImage();
-    }
+	/*
+	 * Constructor for wallObj
+	 */
+	public wallObj(){
+		super(true);
+		super.image = this.getImage();
+	}
 
-    /**
-     * Reads png file and returns the image
-     * @return returns image read for wall object
-     */
-    public BufferedImage getImage() {
-        return getImage("wall.png");
-    }
+	/**
+	 * Reads png file and returns the image
+	 * @return returns image read for wall object
+	 */
+	public BufferedImage getImage() {
+		return getImage("wall.png");
+	}
 }
