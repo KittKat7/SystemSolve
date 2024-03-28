@@ -3,22 +3,23 @@ package edu.appstate.cs.projectname;
 import java.awt.image.BufferedImage;
 
 /**
- * Object representing the end goal
+ * Object representing the path
  */
-public class goalObj extends GameObject{
+public class PathObject extends GameObject{
+
 	/**
-	 * constructor for goalObj
+	 * Constructor for pathObj
 	 */
-	public goalObj(){
+	public PathObject(){
 		super(false);
 		super.image = this.getImage();
 	}
 
 	/**
 	 * Reads png file and returns the image
-	 * @return returns image read for goal object
+	 * @return returns image read for path object
 	 */
 	public BufferedImage getImage() {
-		return getImage("goal.png");
+		return getImage("path.png");
 	}
 }

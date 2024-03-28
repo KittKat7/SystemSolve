@@ -5,12 +5,12 @@ import java.awt.image.BufferedImage;
 /**
  * Object representing the wall
  */
-public class wallObj extends GameObject {
+public class WallObject extends GameObject {
 
 	/*
 	 * Constructor for wallObj
 	 */
-	public wallObj(){
+	public WallObject(){
 		super(true);
 		super.image = this.getImage();
 	}
