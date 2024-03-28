@@ -1,6 +1,10 @@
 package edu.appstate.cs.projectname;
 
-import java.awt.image.BufferedImage;;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
+
+import javax.imageio.ImageIO;;
 /**
  * An object which represents the objects/characters/entities in the game.
  */
@@ -37,8 +41,18 @@ public abstract class GameObject {
 	}//getIsObstacle
 
 	/**
-	 * Reads an image file and assigns it to a variable
+	 * Overrides GameObject get image. 
+	 * Reads png file and returns the image
+	 * @return returns image read for goal object
 	 */
-	public abstract BufferedImage getImage();
+	public BufferedImage getImage(String fileName) {
+		try {
+			File wall = new File
+				(".\\src\\main\\java\\edu\\appstate\\cs\\projectname\\BackGroundImages\\" + fileName);
+			return ImageIO.read(wall);
+		} catch (IOException e) {
+			return null;
+		} 
+	}
 
 }//GameObject
