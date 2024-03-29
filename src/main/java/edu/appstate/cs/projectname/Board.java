@@ -29,6 +29,14 @@ public class Board {
 		return board[y][x];
 	}//getObject(int, int)
 
+	/**
+	 * Returns whether or not a specified tile can be moved to. Returns true of the specified tile
+	 * can be moved to, false otherwise.
+	 * 
+	 * @param x The x coordinate of the specified tile
+	 * @param y The y coordinate of the specified tile
+	 * @return A boolean representing whether the tile can be moved to
+	 */
 	public boolean canMove(int x, int y) {
 		return getObject(x, y) == null || !getObject(x, y).getIsObstacle();
 	}//canMove(int, int
