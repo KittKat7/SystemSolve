@@ -14,9 +14,30 @@ public class Board {
 	 */
 	private GameObject[][] board;
 
+	/**
+	 * Initialized the board with a width and height of 10.
+	 */
 	Board() {
-		// TODO Constructor
+		board = new GameObject[10][10];
 	}//Board()
+
+	/**
+	 * Returns the width of the board.
+	 * 
+	 * @return An int width of the board
+	 */
+	public int getWidth() {
+		return board[0].length;
+	}//getWidth
+
+	/**
+	 * Returns the height of the board.
+	 * 
+	 * @return An int height of the board
+	 */
+	public int getHeight() {
+		return board.length;
+	}//getHeight
 
 	/**
 	 * Returns the game object at the specified position.
