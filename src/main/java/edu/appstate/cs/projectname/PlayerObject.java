@@ -30,7 +30,7 @@ public class PlayerObject extends GameObject {
 	}
 
 	/**
-	 * Moves the player upwards on the game board. 
+	 * Moves the player upwards on the game board.
 	 */
 	public void moveUp() {
 		if (y > 0 && board.canMove(x, y - 1))
@@ -40,7 +40,7 @@ public class PlayerObject extends GameObject {
 	}
 
 	/**
-	 * Moves the player down on the game board. 
+	 * Moves the player down on the game board.
 	 */
 	public void moveDown() {
 		if (y < board.getHeight() - 1 && board.canMove(x, y + 1))
@@ -50,7 +50,7 @@ public class PlayerObject extends GameObject {
 	}
 
 	/**
-	 * Moves the player left on the game board. 
+	 * Moves the player left on the game board.
 	 */
 	public void moveLeft() {
 		if (x > 0 && board.canMove(x - 1, y)) 
@@ -60,7 +60,7 @@ public class PlayerObject extends GameObject {
 	}
 
 	/**
-	 * Moves the player right on the game board. 
+	 * Moves the player right on the game board.
 	 */
 	public void moveRight() {
 		if (x < board.getWidth() - 1 && board.canMove(x + 1, y))
