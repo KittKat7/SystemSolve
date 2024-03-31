@@ -12,7 +12,7 @@ public class Board {
 	 [a,b,c],
 	 [a,b,c]]
 	 */
-	private GameObject[][] board;
+	public GameObject[][] board;
 
 	/**
 	 * Initialized the board with a width and height of 10.
@@ -20,6 +20,14 @@ public class Board {
 	Board() {
 		board = new GameObject[10][10];
 	}//Board()
+
+	/**
+	 * Initialized the board with input paramaters 
+	 * for width and height.
+	 */
+	Board(int x, int y) {
+		board = new GameObject[x][y];
+	}//Board(int x, int y)
 
 	/**
 	 * Returns the width of the board.

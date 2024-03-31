@@ -12,14 +12,14 @@ public class PathObject extends GameObject{
 	 */
 	public PathObject(){
 		super(false);
-		super.image = this.getImage();
+		super.image = PathObject.getImage();
 	}
 
 	/**
 	 * Reads png file and returns the image
 	 * @return returns image read for path object
 	 */
-	public BufferedImage getImage() {
+	public static BufferedImage getImage() {
 		return getImage("path.png");
 	}
 }

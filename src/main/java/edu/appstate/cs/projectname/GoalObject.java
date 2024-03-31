@@ -11,14 +11,14 @@ public class GoalObject extends GameObject{
 	 */
 	public GoalObject(){
 		super(false);
-		super.image = this.getImage();
+		super.image = GoalObject.getImage();
 	}
 
 	/**
 	 * Reads png file and returns the image
 	 * @return returns image read for goal object
 	 */
-	public BufferedImage getImage() {
+	public static BufferedImage getImage() {
 		return getImage("goal.png");
 	}
 }

@@ -8,7 +8,7 @@ import javax.imageio.ImageIO;;
 /**
  * An object which represents the objects/characters/entities in the game.
  */
-public abstract class GameObject {
+public class GameObject {
 
 	// Whether or not this object is an obstacle, and will block movement.
 	protected boolean isObstacle;
@@ -45,7 +45,7 @@ public abstract class GameObject {
 	 * Reads png file and returns the image
 	 * @return returns image read for goal object
 	 */
-	public BufferedImage getImage(String fileName) {
+	public static BufferedImage getImage(String fileName) {
 		try {
 			File wall = new File
 				(".\\src\\main\\java\\edu\\appstate\\cs\\projectname\\BackGroundImages\\" + fileName);

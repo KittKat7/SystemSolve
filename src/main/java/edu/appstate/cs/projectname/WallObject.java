@@ -12,14 +12,14 @@ public class WallObject extends GameObject {
 	 */
 	public WallObject(){
 		super(true);
-		super.image = this.getImage();
+		super.image = WallObject.getImage();
 	}
 
 	/**
 	 * Reads png file and returns the image
 	 * @return returns image read for wall object
 	 */
-	public BufferedImage getImage() {
+	public static BufferedImage getImage() {
 		return getImage("wall.png");
 	}
 }

@@ -23,7 +23,7 @@ public class PlayerObject extends GameObject {
 	 */
 	public PlayerObject(Board board, int StartX, int StartY){
 		super(false);
-		super.image = this.getImage();
+		super.image = PlayerObject.getImage();
 		this.board = board;
 		this.x = StartX;
 		this.y = StartY;
@@ -73,7 +73,7 @@ public class PlayerObject extends GameObject {
 	 * Reads png file and returns the image
 	 * @return returns image read for player object
 	 */
-	public BufferedImage getImage() {
+	public static BufferedImage getImage() {
 		return getImage("player.png");
 	}
 }
