@@ -12,7 +12,7 @@ public class Board {
 	 [a,b,c],
 	 [a,b,c]]
 	 */
-	public GameObject[][] board;
+	private GameObject[][] board;
 
 	/**
 	 * Initialized the board with a width and height of 10.

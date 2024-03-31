@@ -43,7 +43,7 @@ public class DisplayBoard extends JPanel{
 
         for(int i = 0; i < maxScreenRow; i++){
             for(int j = 0; j < maxScreenCol; j++){
-                testBoard[i][j] = new GameObject();
+                testBoard[i][j] = new WallObject();
                 testBoard[i][j].image = WallObject.getImage();
             } 
         }
@@ -60,6 +60,7 @@ public class DisplayBoard extends JPanel{
         testBoard[4][6].image = PathObject.getImage();
         testBoard[4][5].image = PathObject.getImage();
         testBoard[4][4].image = PathObject.getImage();
+        testBoard[4][3].image = PathObject.getImage();
         testBoard[3][3].image = PathObject.getImage();
         testBoard[2][3].image = PathObject.getImage();
         testBoard[2][2].image = PathObject.getImage();
@@ -113,6 +114,4 @@ public class DisplayBoard extends JPanel{
 
         g2.dispose();
     }
-
-    
 }
