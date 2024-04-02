@@ -29,7 +29,7 @@ public class Interpreter {
 	public void parse(String str) {
 		String[] lines = str.split("\n");
 		for (String line : lines) {
-
+			parseLine(line);
 		}
 	}// parse(String)
 
