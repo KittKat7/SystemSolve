@@ -1,8 +1,5 @@
 package edu.appstate.cs.projectname;
 
-import java.util.HashMap;
-import java.util.Map;
-
 public class Interpreter {
 	private static Interpreter interpreter;
 
