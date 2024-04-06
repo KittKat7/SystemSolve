@@ -5,6 +5,10 @@
  */
 package edu.appstate.cs.projectname;
 
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
+
 public class Board {
 
 	/*
@@ -14,6 +18,7 @@ public class Board {
 	 * [a,b,c]]
 	 */
 	private GameObject[][] board;
+	private static String filePath = ".//src//main//java//edu//appstate//cs//projectname//maps";
 
 	/**
 	 * Initialized the board with a width of 16 and height of 12.
@@ -29,6 +34,51 @@ public class Board {
 	Board(int x, int y) {
 		board = new GameObject[x][y];
 	}// Board(int x, int y)
+
+	/**
+	 * Creates a board from a map file.
+	 * 
+	 * @param level The level number to read from the map file.
+	 * @return A new Board Object made from the map file. 
+	 * @throws IOException if an I/O error occured while reading file. 
+	 */
+	public static Board createBoardFromFile(String level) throws IOException {
+		BufferedReader reader = new BufferedReader(new FileReader(filePath + "//level" + level));
+		String line; 
+
+		Board board = new Board();
+
+		int y = 0;
+        while ((line = reader.readLine()) != null && y < board.getHeight()) {
+            for (int x = 0; x < line.length() && x < board.getWidth(); x++) {
+                char symbol = line.charAt(x);
+				GameObject gameObject;
+                switch (symbol) {
+					case ' ':
+						gameObject = new PathObject(); 
+						break;
+					case 'w':
+						gameObject = new WallObject(); 
+						break;
+					case '+':
+						gameObject = new GoalObject(); 
+						break;
+					case '=':
+						gameObject = new PlayerObject(board, x, y); 
+						break;
+					default:
+						System.out.println("Error reading symbol from File");
+						gameObject = null;
+						break;
+				}
+				board.board[y][x] = gameObject;
+            }
+            y++;
+        }
+        reader.close();
+
+		return board;
+	}
 
 	/**
 	 * Returns the width of the board.
