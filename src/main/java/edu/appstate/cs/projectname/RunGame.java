@@ -1,6 +1,8 @@
 package edu.appstate.cs.projectname;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -23,21 +25,47 @@ public class RunGame{
 		window.setTitle("Code Quest");
 		
 		//calls DisplayBoard class to get the JPanel
-		DisplayBoard  game = new DisplayBoard();
-		window.add(game);
+		DisplayBoard  gameBoard = new DisplayBoard();
+		window.add(gameBoard);
 
-		//TextField for user to input to
-		JTextField input = new JTextField(10);
-		window.add(input, BorderLayout.SOUTH);
+		//Split pane to display instructions on top and input area on bottom
+		JSplitPane splitPane = new JSplitPane(JSplitPane.VERTICAL_SPLIT);
 
-		//Text pane to display instructions
-		JTextPane instr = new JTextPane();
-		window.add(instr, BorderLayout.EAST);
-		instr.setText(getInstructions());
-		instr.setEditable(false);
+		//text pane to dispay instruction noneditable to users
+		JTextPane instructionsPane = new JTextPane();
+		instructionsPane.setText(getInstructions());
+		instructionsPane.setEditable(false);
+
+		//Panel to hold text area and submit button
+		JPanel textAreaJPanel = new JPanel();
+
+		//Text area to allow user input. Set specific max size and linewrap
+		JTextArea inputArea = new JTextArea();
+		inputArea.setPreferredSize(new Dimension(350,250));
+		inputArea.setMaximumSize(new Dimension(350,250));
+		inputArea.setLineWrap(true);
+
+		// Buttom for users to press to submit text
+		JButton submitButton = new JButton();
+		submitButton.setText("Submit");
+
+		//adds text area and submit button to panel
+		textAreaJPanel.add(inputArea);
+		textAreaJPanel.add(submitButton);
+
+		//adds instructions panel and text area panel to the top/botton of
+		//the split area
+		splitPane.setTopComponent(instructionsPane);
+		splitPane.setBottomComponent(textAreaJPanel);
+
+		//sets a defined black border between the two areas
+		splitPane.setBorder(BorderFactory.createLineBorder(Color.black));
+
+		//adds the total split pane to the window frame
+		window.add(splitPane, BorderLayout.EAST);
 
 		//\starts the game thread from DisplayBoard
-		game.startGame();
+		gameBoard.startGame();
 
 		window.pack();
 		
@@ -45,19 +73,19 @@ public class RunGame{
 		window.setVisible(true);
 
 		//Action Listner to read user input when enter is pressed
-		input.addActionListener(new ActionListener(){
+		submitButton.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e){
-				String getInput = input.getText();
+				String getInput = inputArea.getText();
 				inputStr = getInput;
-				input.setText("");
 			}
 		}
 		);
-		
 	}
 
 	//returns user input as a string
 	public static String getInputString(){
+		
+		System.out.print(inputStr);
 		return inputStr;
 	}
 
