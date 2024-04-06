@@ -15,3 +15,4 @@ For now you must reboot the system by guiding yourself through the
 computer system with simple commands.
 
 Please input one of the following commands: Up, Down, Left, Right.
+Then press the Submit button.
