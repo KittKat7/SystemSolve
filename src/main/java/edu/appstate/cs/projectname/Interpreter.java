@@ -2,6 +2,7 @@ package edu.appstate.cs.projectname;
 
 public class Interpreter {
 	private static Interpreter interpreter;
+	private PlayerObject player;
 
 	/**
 	 * A factory that returns the interpreter instance, or makes a new instance if
@@ -14,6 +15,15 @@ public class Interpreter {
 			interpreter = new Interpreter();
 		return interpreter;
 	}// getInterpreter()
+
+	/**
+     * Set the player object for the interpreter.
+     * 
+     * @param player The player object to set.
+     */
+    public void setPlayer(PlayerObject player) {
+        this.player = player;
+    }
 
 	/**
 	 * Parses the string param, and returns a string with the completion/error
@@ -39,13 +49,13 @@ public class Interpreter {
 	 */
 	private String parseLine(String line) {
 		if (line == "moveUp")
-			; // TODO: move up
+			player.move("up");
 		else if (line == "moveLeft")
-			; // TODO: move left
+			player.move("left");
 		else if (line == "moveRight")
-			; // TODO: move right
+			player.move("right");
 		else if (line == "moveDown")
-			; // TODO: move down
+			player.move("down");
 		return "";
 	}// parseLine()
 

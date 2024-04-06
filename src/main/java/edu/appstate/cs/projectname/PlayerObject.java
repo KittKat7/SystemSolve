@@ -30,42 +30,32 @@ public class PlayerObject extends GameObject {
 	}
 
 	/**
-	 * Moves the player upwards on the game board.
+	 *  Moves the player in the specified direction on the game board.
+	 * 
+	 * 	@param dir The Direction in which the player should move in.
 	 */
-	public void moveUp() {
-		if (y > 0 && board.canMove(x, y - 1))
-		{
-			y--;
-		}
-	}
-
-	/**
-	 * Moves the player down on the game board.
-	 */
-	public void moveDown() {
-		if (y < board.getHeight() - 1 && board.canMove(x, y + 1))
-		{
-			y++;
-		}
-	}
-
-	/**
-	 * Moves the player left on the game board.
-	 */
-	public void moveLeft() {
-		if (x > 0 && board.canMove(x - 1, y)) 
-		{
-			x--;
-		}
-	}
-
-	/**
-	 * Moves the player right on the game board.
-	 */
-	public void moveRight() {
-		if (x < board.getWidth() - 1 && board.canMove(x + 1, y))
-		{
-			x++;
+	public void move(String dir) {
+		switch (dir) {
+			case "up":
+				if (y > 0 && board.canMove(x, y - 1)) {
+					y--;
+				}
+				break;
+			case "down":
+				if (y < board.getHeight() - 1 && board.canMove(x, y + 1)) {
+					y++;
+				}
+				break;
+			case "left":
+				if (x > 0 && board.canMove(x - 1, y)) {
+					x--;
+				}
+				break;
+			case "right":
+				if (x < board.getWidth() - 1 && board.canMove(x + 1, y)) {
+					x++;
+				}
+				break;
 		}
 	}
 
