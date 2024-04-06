@@ -11,7 +11,7 @@ import java.util.List;
 public class ReadInstructions {
 
 	// String that contains the repeated parts of the path
-	private static String filePathStr = "./src/main/resources/edu/appstate/cs/projectname/instructions";
+	private static String filePathStr = ".//src//main//java//edu//appstate//cs//projectname//Instructions";
 
 	/**
 	 * Method that takes the level as an int and
@@ -24,7 +24,7 @@ public class ReadInstructions {
 	public static String readFile(int level) {
 		try {
 			String output = "";
-			List<String> lines = Files.readAllLines(Paths.get(filePathStr + "/level" + level + "Instr.txt"));
+			List<String> lines = Files.readAllLines(Paths.get(filePathStr + "//level" + level + "Instr.txt"));
 			for (String str : lines)
 				output += str + "\n";
 			return output;

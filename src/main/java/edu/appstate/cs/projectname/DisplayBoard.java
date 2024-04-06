@@ -127,7 +127,6 @@ public class DisplayBoard extends JPanel implements Runnable{
 	 * to be drawn.
 	 */
 	public void update(){
-		
 	}
 
 	/**
