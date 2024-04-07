@@ -98,6 +98,37 @@ public class Board {
 		return board.length;
 	}// getHeight
 
+
+	/**
+	 * Updates specified object at specified position.
+	 * 
+	 * @param object The object to be set.
+	 * @param x The x-position to set the object.
+	 * @param y The y-position to set the object.
+	 */
+	public void setObject(String object, int x, int y)
+	{
+		GameObject gameObject;
+		switch (object) {
+			case "Path":
+            gameObject = new PathObject();
+            break;
+        case "Wall":
+            gameObject = new WallObject();
+            break;
+        case "Goal":
+            gameObject = new GoalObject();
+            break;
+        case "Player":
+            gameObject = new PlayerObject(this, x, y);
+            break;
+        default:
+            System.out.println("Invalid object type");
+            return; 
+		}
+		board[y][x] = gameObject;
+	}
+
 	/**
 	 * Returns the game object at the specified position.
 	 *

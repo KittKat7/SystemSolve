@@ -48,13 +48,13 @@ public class Interpreter {
 	 * @return Either an empty string, or an error message
 	 */
 	private String parseLine(String line) {
-		if (line == "moveUp")
+		if (line == "Up")
 			player.move("up");
-		else if (line == "moveLeft")
+		else if (line == "Left")
 			player.move("left");
-		else if (line == "moveRight")
+		else if (line == "Right")
 			player.move("right");
-		else if (line == "moveDown")
+		else if (line == "Down")
 			player.move("down");
 		return "";
 	}// parseLine()

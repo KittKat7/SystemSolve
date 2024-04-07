@@ -35,27 +35,39 @@ public class PlayerObject extends GameObject {
 	 * 	@param dir The Direction in which the player should move in.
 	 */
 	public void move(String dir) {
+		int newX = x;
+		int newY = y;
+
+		//Player movement
 		switch (dir) {
 			case "up":
 				if (y > 0 && board.canMove(x, y - 1)) {
-					y--;
+					newY--;
 				}
 				break;
 			case "down":
 				if (y < board.getHeight() - 1 && board.canMove(x, y + 1)) {
-					y++;
+					newY++;
 				}
 				break;
 			case "left":
 				if (x > 0 && board.canMove(x - 1, y)) {
-					x--;
+					newX--;
 				}
 				break;
 			case "right":
 				if (x < board.getWidth() - 1 && board.canMove(x + 1, y)) {
-					x++;
+					newX++;
 				}
 				break;
+		}
+
+		//Replaces existing position with a path object and moves the player to the new coordinates in the board array. 
+		if (newX != x || newY != y) {
+			board.setObject("Path", x, y);
+			x = newX;
+			y = newY;
+			board.setObject("Player", x, y);
 		}
 	}
 
@@ -67,6 +79,3 @@ public class PlayerObject extends GameObject {
 		return getImage("player.png");
 	}
 }
-
-
-
