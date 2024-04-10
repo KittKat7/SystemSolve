@@ -5,6 +5,7 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
 
 import javax.swing.*;
 
@@ -14,11 +15,14 @@ import javax.swing.*;
 public class RunGame{
 
 	static String inputStr = "";
+	protected static boolean b;
 	/**
 	 * Main method that sets up the JFram and start the game
 	 * @param args
+	 * @throws IOException
 	 */
-	public static void main(String[] args){
+	public static void main(String[] args) throws IOException{
+
 		JFrame window = new JFrame();
 		window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		window.setResizable(false);
@@ -32,8 +36,9 @@ public class RunGame{
 		JSplitPane splitPane = new JSplitPane(JSplitPane.VERTICAL_SPLIT);
 
 		//text pane to dispay instruction noneditable to users
-		JTextPane instructionsPane = new JTextPane();
-		instructionsPane.setText(getInstructions());
+		JTextPane instructionsPane = gameBoard.getInstructionsPane();
+		instructionsPane.setPreferredSize(new Dimension(350,290));
+		instructionsPane.setMaximumSize(new Dimension(350,290));
 		instructionsPane.setEditable(false);
 
 		//Panel to hold text area and submit button
@@ -41,17 +46,51 @@ public class RunGame{
 
 		//Text area to allow user input. Set specific max size and linewrap
 		JTextArea inputArea = new JTextArea();
-		inputArea.setPreferredSize(new Dimension(350,250));
-		inputArea.setMaximumSize(new Dimension(350,250));
+		inputArea.setPreferredSize(new Dimension(350,220));
+		inputArea.setMaximumSize(new Dimension(350,220));
 		inputArea.setLineWrap(true);
 
-		// Buttom for users to press to submit text
+		// Buttons for users to press
 		JButton submitButton = new JButton();
 		submitButton.setText("Submit");
+		JButton nextLevelButton = new JButton();
+		nextLevelButton.setText("Next Level");
+		JButton resetButton = new JButton();
+		resetButton.setText("Reset");
 
 		//adds text area and submit button to panel
-		textAreaJPanel.add(inputArea);
-		textAreaJPanel.add(submitButton);
+		textAreaJPanel.setLayout(new BorderLayout());
+		textAreaJPanel.add(inputArea, BorderLayout.NORTH);
+		textAreaJPanel.add(submitButton, BorderLayout.CENTER);
+
+		//temporary until movement is done
+		b = true;
+
+		//Will test for player at goal and add the appropriate button.
+		if(!b)
+		{
+			textAreaJPanel.add(resetButton, BorderLayout.SOUTH);
+			resetButton.addActionListener(new ActionListener(){
+				public void actionPerformed(ActionEvent e){
+					gameBoard.setButton(true);
+					gameBoard.setLevel(gameBoard.getLevel());
+					inputArea.setText("");
+				}
+			}
+			);
+		}
+		else if(b)//if(DisplayBoard.playerAtGoal)
+		{
+			textAreaJPanel.add(nextLevelButton, BorderLayout.SOUTH);
+
+			nextLevelButton.addActionListener(new ActionListener(){
+				public void actionPerformed(ActionEvent e){
+					gameBoard.setButton(true);
+					gameBoard.setLevel(Integer.toString(Integer.parseInt(gameBoard.getLevel()) + 1));
+				}
+			}
+			);
+		}
 
 		//adds instructions panel and text area panel to the top/botton of
 		//the split area
@@ -76,7 +115,8 @@ public class RunGame{
 		submitButton.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e){
 				String getInput = inputArea.getText();
-				inputStr = getInput;
+				//will pass to interpreter
+				System.out.print(getInput + PlayerObject.playerAtGoalB);
 			}
 		}
 		);
@@ -84,8 +124,6 @@ public class RunGame{
 
 	//returns user input as a string
 	public static String getInputString(){
-		
-		System.out.print(inputStr);
 		return inputStr;
 	}
 
@@ -94,9 +132,8 @@ public class RunGame{
 	 * and adds it to the JTextPane
 	 * @return returns Instructions String
 	 */
-	public static String getInstructions()
-	{
-		String instr = ReadInstructions.readFile(1);
+	public static String getInstructions(String s){
+		String instr = ReadInstructions.readFile(s);
 		return instr;
 	}
 }

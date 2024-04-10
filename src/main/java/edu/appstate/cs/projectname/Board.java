@@ -49,22 +49,22 @@ public class Board {
 		Board board = new Board();
 
 		int y = 0;
-        while ((line = reader.readLine()) != null && y < board.getHeight()) {
-            for (int x = 0; x < line.length() && x < board.getWidth(); x++) {
-                char symbol = line.charAt(x);
+		while ((line = reader.readLine()) != null && y < board.getHeight()) {
+			for (int x = 0; x < line.length() && x < board.getWidth(); x++) {
+				char symbol = line.charAt(x);
 				GameObject gameObject;
-                switch (symbol) {
+				switch (symbol) {
 					case ' ':
-						gameObject = new PathObject(); 
+						gameObject = new PathObject();
 						break;
 					case 'w':
-						gameObject = new WallObject(); 
+						gameObject = new WallObject();
 						break;
 					case '+':
-						gameObject = new GoalObject(); 
+						gameObject = new GoalObject(x, y);
 						break;
 					case '=':
-						gameObject = new PlayerObject(board, x, y); 
+						gameObject = new PlayerObject(board, x, y);
 						break;
 					default:
 						System.out.println("Error reading symbol from File");
@@ -72,10 +72,10 @@ public class Board {
 						break;
 				}
 				board.board[y][x] = gameObject;
-            }
-            y++;
-        }
-        reader.close();
+			}
+			y++;
+		}
+		reader.close();
 
 		return board;
 	}
@@ -111,20 +111,20 @@ public class Board {
 		GameObject gameObject;
 		switch (object) {
 			case "Path":
-            gameObject = new PathObject();
-            break;
-        case "Wall":
-            gameObject = new WallObject();
-            break;
-        case "Goal":
-            gameObject = new GoalObject();
-            break;
-        case "Player":
-            gameObject = new PlayerObject(this, x, y);
-            break;
-        default:
-            System.out.println("Invalid object type");
-            return; 
+			gameObject = new PathObject();
+			break;
+		case "Wall":
+			gameObject = new WallObject();
+			break;
+		case "Goal":
+			gameObject = new GoalObject();
+			break;
+		case "Player":
+			gameObject = new PlayerObject(this, x, y);
+			break;
+		default:
+			System.out.println("Invalid object type");
+			return; 
 		}
 		board[y][x] = gameObject;
 	}

@@ -4,9 +4,10 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
-import java.awt.image.BufferedImage;
+import java.io.IOException;
 
 import javax.swing.JPanel;
+import javax.swing.JTextPane;
 
 /**
  * Class to display game images onto a JPanel
@@ -14,19 +15,22 @@ import javax.swing.JPanel;
 public class DisplayBoard extends JPanel implements Runnable{
 
 	//Sets values needed for screen display
-	final int originalTileSize = 16; // 16x16 tile
-	final int scale = 3;
-	public final int tileSize = originalTileSize * scale; // 48x48 tile size
-	public final int maxScreenCol = 16;
-	public final int maxScreenRow = 12;
-	public final int screenWidth = tileSize * maxScreenCol; // 768 pixels aka 16 48x48 tiles
-	public final int screenHeight = tileSize * maxScreenRow; // 576 pixels aka 12 48x48 tiles
-	public final int FPS = 60;
-	public int x = 11;
-	public int y = 7;
-	//test board
-	BufferedImage[] image;
-	public GameObject[][] testBoard = new GameObject[maxScreenRow][maxScreenCol];
+	private final int originalTileSize = 16; // 16x16 tile
+	private final int scale = 3;
+	private final int tileSize = originalTileSize * scale; // 48x48 tile size
+	private final int maxScreenCol = 16;
+	private final int maxScreenRow = 12;
+	private final int screenWidth = tileSize * maxScreenCol; // 768 pixels aka 16 48x48 tiles
+	private final int screenHeight = tileSize * maxScreenRow; // 576 pixels aka 12 48x48 tiles
+	private final int FPS = 60;
+	private static String level = "0"; // temporary
+	static Boolean playerAtGoalB = false; //temporary
+	static Boolean button = false;
+
+	//Board obj and GameOnject array of objects
+	public Board board = new Board(maxScreenCol, maxScreenRow);
+
+	private JTextPane instructionsPane = new JTextPane();
 
 	Thread gameThread;
 
@@ -39,51 +43,38 @@ public class DisplayBoard extends JPanel implements Runnable{
 		this.setFocusable(true);
 	}
 
-	/**
-	 * Temporary method to initialize and fill the 
-	 * testBoard array with images
-	 */
-	public void fillArray(int x, int y){
-		if(x == 11 && y == 7)
-		{
-			for(int i = 0; i < maxScreenRow; i++){
-				for(int j = 0; j < maxScreenCol; j++){
-					testBoard[i][j] = new WallObject();
-					testBoard[i][j].image = WallObject.getImage();
-				} 
-			}
-
-
-			testBoard[10][7].image = PathObject.getImage();
-			testBoard[9][7].image = PathObject.getImage();
-			testBoard[8][7].image = PathObject.getImage();
-			testBoard[8][6].image = PathObject.getImage();
-			testBoard[7][6].image = PathObject.getImage();
-			testBoard[6][6].image = PathObject.getImage();
-			testBoard[5][6].image = PathObject.getImage();
-			testBoard[4][6].image = PathObject.getImage();
-			testBoard[4][5].image = PathObject.getImage();
-			testBoard[4][4].image = PathObject.getImage();
-			testBoard[4][3].image = PathObject.getImage();
-			testBoard[3][3].image = PathObject.getImage();
-			testBoard[2][3].image = PathObject.getImage();
-			testBoard[2][2].image = PathObject.getImage();
-			testBoard[1][2].image = PathObject.getImage();
-			testBoard[0][2].image = GoalObject.getImage();
-			testBoard[x][y].image = PlayerObject.getImage();
-		}
-		else
-			testBoard[x][y].image = PlayerObject.getImage();
+	//sets level
+	//temporary until level class is implemeted
+	public void setLevel(String i){
+		level = i;
 	}
+
+	//temporary untili level class is implemented
+	public String getLevel(){
+		return level;
+	}
+
+	//creates a JTextPane to update 
+	public JTextPane getInstructionsPane(){
+		return instructionsPane;
+	}
+
+	//sets button boolean to only update a new board when either
+	//reset or nextLevel is pressed
+	public void setButton(Boolean b){
+		button = b;
+	}
+	
 
 	/**
 	 * Method to start the game thread
+	 * @throws IOException 
 	 */
-	public void startGame(){
+	public void startGame() throws IOException{
 		gameThread = new Thread(this);
 		gameThread.start();
-		//temporary call
-		fillArray(11, 7);
+		board = Board.createBoardFromFile(level);
+		instructionsPane.setText(RunGame.getInstructions(level));
 	}
 
 	/**
@@ -108,7 +99,10 @@ public class DisplayBoard extends JPanel implements Runnable{
 			lastTime = currentTime;
 			
 			if(delta >= 1){
-				update();
+				try {
+					update();
+				} catch (IOException e) {
+				}
 				repaint();
 				delta--;
 				drawCount++;
@@ -125,8 +119,16 @@ public class DisplayBoard extends JPanel implements Runnable{
 	/**
 	 * Method to be called to update the board with new information
 	 * to be drawn.
+	 * @throws IOException 
 	 */
-	public void update(){
+	private void update() throws IOException{
+		playerAtGoalB = PlayerObject.playerAtGoalB;
+		if(button == true){
+			board = Board.createBoardFromFile(level);
+			//gameBoard = board.getBoard();
+			instructionsPane.setText(RunGame.getInstructions(level));
+			button = false;
+		}
 	}
 
 	/**
@@ -142,7 +144,7 @@ public class DisplayBoard extends JPanel implements Runnable{
 		
 		while(col < maxScreenCol && row < maxScreenRow)
 		{
-			g2.drawImage(testBoard[row][col].image, x, y, tileSize, tileSize, null);
+			g2.drawImage(board.getObject(col, row).image, x, y, tileSize, tileSize, null);
 			col++;
 			x += tileSize;
 			

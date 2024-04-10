@@ -21,7 +21,7 @@ public class ReadInstructions {
 	 * @param level level the player is on as an int
 	 * @return returns string read from file
 	 */
-	public static String readFile(int level) {
+	public static String readFile(String level) {
 		try {
 			String output = "";
 			List<String> lines = Files.readAllLines(Paths.get(filePathStr + "//level" + level + "Instr.txt"));

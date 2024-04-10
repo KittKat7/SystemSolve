@@ -10,6 +10,7 @@ public class PlayerObject extends GameObject {
 	// Players current x & y position.
 	private int x;
 	private int y;
+	public static Boolean playerAtGoalB;
 
 	// Reference to the game board.
 	private Board board; 
@@ -27,6 +28,7 @@ public class PlayerObject extends GameObject {
 		this.board = board;
 		this.x = StartX;
 		this.y = StartY;
+		playerAtGoalB = playerAtGoal();
 	}
 
 	/**
@@ -69,6 +71,17 @@ public class PlayerObject extends GameObject {
 			y = newY;
 			board.setObject("Player", x, y);
 		}
+	}
+
+	/*
+	 * Test if the players location is the same as the goals
+	 */
+	public Boolean playerAtGoal(){
+		if(this.x == GoalObject.getX && this.y == GoalObject.getY){
+			return true;
+		}
+		else
+			return false;
 	}
 
 	/**
