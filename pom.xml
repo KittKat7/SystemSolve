@@ -48,7 +48,7 @@
           <transformers>
             <transformer implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
               <!-- TODO: Update this to your actual entry point class name and package. -->
-              <mainClass>edu.appstate.cs.projectname.App</mainClass>
+              <mainClass>edu.appstate.cs.codequest.App</mainClass>
             </transformer>
           </transformers>
         </configuration>
