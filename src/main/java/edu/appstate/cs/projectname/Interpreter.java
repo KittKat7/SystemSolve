@@ -24,8 +24,6 @@ public class Interpreter {
 
 	HashMap<String, Integer> vars = new HashMap<String, Integer>();
 
-	HashMap<String, Integer> vars = new HashMap<String, Integer>();
-
 	/**
 	 * Set the player object for the interpreter.
 	 * 
