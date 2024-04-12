@@ -1,4 +1,4 @@
-package edu.appstate.cs.projectname;
+package edu.appstate.cs.codequest;
 
 import java.io.IOException;
 import java.nio.file.Files;
@@ -11,7 +11,7 @@ import java.util.List;
 public class ReadInstructions {
 
 	// String that contains the repeated parts of the path
-	private static String filePathStr = ".//src//main//java//edu//appstate//cs//projectname//Instructions";
+	private static String filePathStr = Resource.resourcePath + "Instructions";
 
 	/**
 	 * Method that takes the level as an int and
@@ -21,10 +21,10 @@ public class ReadInstructions {
 	 * @param level level the player is on as an int
 	 * @return returns string read from file
 	 */
-	public static String readFile(int level) {
+	public static String readFile(String level) {
 		try {
 			String output = "";
-			List<String> lines = Files.readAllLines(Paths.get(filePathStr + "//level" + level + "Instr.txt"));
+			List<String> lines = Files.readAllLines(Paths.get(filePathStr + level));
 			for (String str : lines)
 				output += str + "\n";
 			return output;

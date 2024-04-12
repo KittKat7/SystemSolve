@@ -9,8 +9,8 @@ Your job is to get the system up and running again.
 You have a single process that you have control of, 
 but you only have intermittent contact with this process. 
 You must write code to navigate this process through the 
-failed systems and get them up and running. For now you must 
+failed systems and get them up and running.For now you must 
 reboot the system by guiding yourself through the 
 computer system with simple commands.
 
-When you are ready to begin, press the next level button. 
+Hit the nextLevel button to continue.

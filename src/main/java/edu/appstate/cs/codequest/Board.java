@@ -3,7 +3,7 @@
  * (c) Team Beedrill 2024-03-27
  * Please refer to the license file
  */
-package edu.appstate.cs.projectname;
+package edu.appstate.cs.codequest;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
@@ -18,7 +18,9 @@ public class Board {
 	 * [a,b,c]]
 	 */
 	private GameObject[][] board;
-	private static String filePath = ".//src//main//java//edu//appstate//cs//projectname//maps";
+	private static String filePath = Resource.resourcePath + "maps";
+	private PlayerObject player;
+	private boolean hasGoal = false;
 
 	/**
 	 * Initialized the board with a width of 16 and height of 12.
@@ -39,32 +41,34 @@ public class Board {
 	 * Creates a board from a map file.
 	 * 
 	 * @param level The level number to read from the map file.
-	 * @return A new Board Object made from the map file. 
-	 * @throws IOException if an I/O error occured while reading file. 
+	 * @return A new Board Object made from the map file.
+	 * @throws IOException if an I/O error occured while reading file.
 	 */
 	public static Board createBoardFromFile(String level) throws IOException {
-		BufferedReader reader = new BufferedReader(new FileReader(filePath + "//level" + level));
-		String line; 
+		BufferedReader reader = new BufferedReader(new FileReader(filePath + level));
+		String line;
 
 		Board board = new Board();
 
 		int y = 0;
-        while ((line = reader.readLine()) != null && y < board.getHeight()) {
-            for (int x = 0; x < line.length() && x < board.getWidth(); x++) {
-                char symbol = line.charAt(x);
+		while ((line = reader.readLine()) != null && y < board.getHeight()) {
+			for (int x = 0; x < line.length() && x < board.getWidth(); x++) {
+				char symbol = line.charAt(x);
 				GameObject gameObject;
-                switch (symbol) {
+				switch (symbol) {
 					case ' ':
-						gameObject = new PathObject(); 
+						gameObject = new PathObject();
 						break;
 					case 'w':
-						gameObject = new WallObject(); 
-						break;
-					case '+':
-						gameObject = new GoalObject(); 
+						gameObject = new WallObject();
 						break;
 					case '=':
-						gameObject = new PlayerObject(board, x, y); 
+						gameObject = new GoalObject(x, y);
+						board.hasGoal = true;
+						break;
+					case '+':
+						board.player = new PlayerObject(board, x, y);
+						gameObject = board.player;
 						break;
 					default:
 						System.out.println("Error reading symbol from File");
@@ -72,10 +76,10 @@ public class Board {
 						break;
 				}
 				board.board[y][x] = gameObject;
-            }
-            y++;
-        }
-        reader.close();
+			}
+			y++;
+		}
+		reader.close();
 
 		return board;
 	}
@@ -98,33 +102,31 @@ public class Board {
 		return board.length;
 	}// getHeight
 
-
 	/**
 	 * Updates specified object at specified position.
 	 * 
 	 * @param object The object to be set.
-	 * @param x The x-position to set the object.
-	 * @param y The y-position to set the object.
+	 * @param x      The x-position to set the object.
+	 * @param y      The y-position to set the object.
 	 */
-	public void setObject(String object, int x, int y)
-	{
+	public void setObject(String object, int x, int y) {
 		GameObject gameObject;
 		switch (object) {
 			case "Path":
-            gameObject = new PathObject();
-            break;
-        case "Wall":
-            gameObject = new WallObject();
-            break;
-        case "Goal":
-            gameObject = new GoalObject();
-            break;
-        case "Player":
-            gameObject = new PlayerObject(this, x, y);
-            break;
-        default:
-            System.out.println("Invalid object type");
-            return; 
+				gameObject = new PathObject();
+				break;
+			case "Wall":
+				gameObject = new WallObject();
+				break;
+			case "Goal":
+				gameObject = new GoalObject();
+				break;
+			case "Player":
+				gameObject = new PlayerObject(this, x, y);
+				break;
+			default:
+				System.out.println("Invalid object type");
+				return;
 		}
 		board[y][x] = gameObject;
 	}
@@ -140,6 +142,25 @@ public class Board {
 	public GameObject getObject(int x, int y) {
 		return board[y][x];
 	}// getObject(int, int)
+
+	/**
+	 * Returns the PlayerObject from the board.
+	 * 
+	 * @return The PlayerObject from the board.
+	 */
+	public PlayerObject getPlayer() {
+		return player;
+	}
+
+	/**
+	 * A getter for hasGoal. Returns true if the board has a goal, and false
+	 * otherwise.
+	 * 
+	 * @return True if the board has a goal, false otherwise.
+	 */
+	public boolean getHasGoal() {
+		return hasGoal;
+	}
 
 	/**
 	 * Returns whether or not a specified tile can be moved to. Returns true of the
