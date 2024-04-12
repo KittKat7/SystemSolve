@@ -18,7 +18,7 @@ public class Board {
 	 * [a,b,c]]
 	 */
 	private GameObject[][] board;
-	private static String filePath = ".//src//main//java//edu//appstate//cs//codequest//maps";
+	private static String filePath = Resource.resourcePath + "maps";
 	private PlayerObject player;
 	private boolean hasGoal = false;
 
@@ -150,6 +150,16 @@ public class Board {
 	 */
 	public PlayerObject getPlayer() {
 		return player;
+	}
+
+	/**
+	 * A getter for hasGoal. Returns true if the board has a goal, and false
+	 * otherwise.
+	 * 
+	 * @return True if the board has a goal, false otherwise.
+	 */
+	public boolean getHasGoal() {
+		return hasGoal;
 	}
 
 	/**

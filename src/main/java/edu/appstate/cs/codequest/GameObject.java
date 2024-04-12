@@ -49,7 +49,7 @@ public abstract class GameObject {
 	 */
 	public static BufferedImage getImage(String fileName) {
 		try {
-			File wall = new File("./src/main/resources/edu/appstate/cs/codequest/images/" + fileName);
+			File wall = new File(Resource.resourcePath + "/images/" + fileName);
 			return ImageIO.read(wall);
 		} catch (IOException e) {
 			return null;

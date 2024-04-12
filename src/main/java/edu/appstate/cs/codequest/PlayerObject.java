@@ -66,9 +66,12 @@ public class PlayerObject extends GameObject {
 		// Replaces existing position with a path object and moves the player to the new
 		// coordinates in the board array.
 		if (newX != x || newY != y) {
-			if (isAtGoal) {
+			if (isAtGoal && board.getHasGoal()) {
 				board.setObject("Goal", x, y);
 				isAtGoal = false;
+			} else if (isAtGoal && !board.getHasGoal()) {
+				board.setObject("Path", x, y);
+				isAtGoal = true;
 			} else {
 				board.setObject("Path", x, y);
 				if (board.getObject(newX, newY) instanceof GoalObject)
