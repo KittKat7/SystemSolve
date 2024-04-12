@@ -28,6 +28,7 @@ public class PlayerObject extends GameObject {
 		this.board = board;
 		this.x = StartX;
 		this.y = StartY;
+		isAtGoal = !board.getHasGoal();
 	}
 
 	/**
