@@ -19,6 +19,7 @@ public class Board {
 	 */
 	private GameObject[][] board;
 	private static String filePath = ".//src//main//java//edu//appstate//cs//projectname//maps";
+	private PlayerObject player;
 
 	/**
 	 * Initialized the board with a width of 16 and height of 12.
@@ -39,12 +40,12 @@ public class Board {
 	 * Creates a board from a map file.
 	 * 
 	 * @param level The level number to read from the map file.
-	 * @return A new Board Object made from the map file. 
-	 * @throws IOException if an I/O error occured while reading file. 
+	 * @return A new Board Object made from the map file.
+	 * @throws IOException if an I/O error occured while reading file.
 	 */
 	public static Board createBoardFromFile(String level) throws IOException {
 		BufferedReader reader = new BufferedReader(new FileReader(filePath + "//level" + level));
-		String line; 
+		String line;
 
 		Board board = new Board();
 
@@ -60,11 +61,12 @@ public class Board {
 					case 'w':
 						gameObject = new WallObject();
 						break;
-					case '+':
+					case '=':
 						gameObject = new GoalObject(x, y);
 						break;
-					case '=':
-						gameObject = new PlayerObject(board, x, y);
+					case '+':
+						board.player = new PlayerObject(board, x, y);
+						gameObject = board.player;
 						break;
 					default:
 						System.out.println("Error reading symbol from File");
@@ -98,33 +100,31 @@ public class Board {
 		return board.length;
 	}// getHeight
 
-
 	/**
 	 * Updates specified object at specified position.
 	 * 
 	 * @param object The object to be set.
-	 * @param x The x-position to set the object.
-	 * @param y The y-position to set the object.
+	 * @param x      The x-position to set the object.
+	 * @param y      The y-position to set the object.
 	 */
-	public void setObject(String object, int x, int y)
-	{
+	public void setObject(String object, int x, int y) {
 		GameObject gameObject;
 		switch (object) {
 			case "Path":
-			gameObject = new PathObject();
-			break;
-		case "Wall":
-			gameObject = new WallObject();
-			break;
-		case "Goal":
-			gameObject = new GoalObject();
-			break;
-		case "Player":
-			gameObject = new PlayerObject(this, x, y);
-			break;
-		default:
-			System.out.println("Invalid object type");
-			return; 
+				gameObject = new PathObject();
+				break;
+			case "Wall":
+				gameObject = new WallObject();
+				break;
+			case "Goal":
+				gameObject = new GoalObject();
+				break;
+			case "Player":
+				gameObject = new PlayerObject(this, x, y);
+				break;
+			default:
+				System.out.println("Invalid object type");
+				return;
 		}
 		board[y][x] = gameObject;
 	}
@@ -140,6 +140,15 @@ public class Board {
 	public GameObject getObject(int x, int y) {
 		return board[y][x];
 	}// getObject(int, int)
+
+	/**
+	 * Returns the PlayerObject from the board.
+	 * 
+	 * @return The PlayerObject from the board.
+	 */
+	public PlayerObject getPlayer() {
+		return player;
+	}
 
 	/**
 	 * Returns whether or not a specified tile can be moved to. Returns true of the
