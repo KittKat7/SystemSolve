@@ -3,13 +3,13 @@
   <modelVersion>4.0.0</modelVersion>
 
   <groupId>edu.appstate.cs</groupId>
-  <!-- TODO: Update the project name. This should all be 1 word. -->
-  <artifactId>YourProjectName</artifactId>
+  <!-- Update the project name. This should all be 1 word. -->
+  <artifactId>CodeQuest</artifactId>
   <version>1.0-SNAPSHOT</version>
   <packaging>jar</packaging>
 
-  <!-- TODO: Update the project name. This can be multiple words. -->
-  <name>Your Project Name</name>
+  <!-- Update the project name. This can be multiple words. -->
+  <name>Code Quest</name>
   <url>http://maven.apache.org</url>
 
   <properties>
@@ -47,7 +47,7 @@
         <configuration>
           <transformers>
             <transformer implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
-              <!-- TODO: Update this to your actual entry point class name and package. -->
+              <!-- Update this to your actual entry point class name and package. -->
               <mainClass>edu.appstate.cs.codequest.App</mainClass>
             </transformer>
           </transformers>
