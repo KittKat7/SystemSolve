@@ -20,6 +20,7 @@ public class Board {
 	private GameObject[][] board;
 	private static String filePath = ".//src//main//java//edu//appstate//cs//projectname//maps";
 	private PlayerObject player;
+	private boolean hasGoal = false;
 
 	/**
 	 * Initialized the board with a width of 16 and height of 12.
@@ -63,6 +64,7 @@ public class Board {
 						break;
 					case '=':
 						gameObject = new GoalObject(x, y);
+						board.hasGoal = true;
 						break;
 					case '+':
 						board.player = new PlayerObject(board, x, y);

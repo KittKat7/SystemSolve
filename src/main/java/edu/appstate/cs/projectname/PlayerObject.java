@@ -10,37 +10,36 @@ public class PlayerObject extends GameObject {
 	// Players current x & y position.
 	private int x;
 	private int y;
-	public static Boolean playerAtGoalB;
+	private Boolean isAtGoal;
 
 	// Reference to the game board.
-	private Board board; 
+	private Board board;
 
 	/**
 	 * Constructor for playerObject
 	 * 
-	 * @param board The game board for the player.
+	 * @param board  The game board for the player.
 	 * @param StartX The initial x-coordinate of the player.
 	 * @param StartY the initial y-coordinate of the player.
 	 */
-	public PlayerObject(Board board, int StartX, int StartY){
+	public PlayerObject(Board board, int StartX, int StartY) {
 		super(false);
 		super.image = PlayerObject.getImage();
 		this.board = board;
 		this.x = StartX;
 		this.y = StartY;
-		playerAtGoalB = playerAtGoal();
 	}
 
 	/**
-	 *  Moves the player in the specified direction on the game board.
+	 * Moves the player in the specified direction on the game board.
 	 * 
-	 * 	@param dir The Direction in which the player should move in.
+	 * @param dir The Direction in which the player should move in.
 	 */
 	public void move(String dir) {
 		int newX = x;
 		int newY = y;
 
-		//Player movement
+		// Player movement
 		switch (dir) {
 			case "up":
 				if (y > 0 && board.canMove(x, y - 1)) {
@@ -64,9 +63,17 @@ public class PlayerObject extends GameObject {
 				break;
 		}
 
-		//Replaces existing position with a path object and moves the player to the new coordinates in the board array. 
+		// Replaces existing position with a path object and moves the player to the new
+		// coordinates in the board array.
 		if (newX != x || newY != y) {
-			board.setObject("Path", x, y);
+			if (isAtGoal) {
+				board.setObject("Goal", x, y);
+				isAtGoal = false;
+			} else {
+				board.setObject("Path", x, y);
+				if (board.getObject(newX, newY) instanceof GoalObject)
+					isAtGoal = false;
+			}
 			x = newX;
 			y = newY;
 			board.setObject("Player", x, y);
@@ -76,16 +83,13 @@ public class PlayerObject extends GameObject {
 	/*
 	 * Test if the players location is the same as the goals
 	 */
-	public Boolean playerAtGoal(){
-		if(this.x == GoalObject.getX && this.y == GoalObject.getY){
-			return true;
-		}
-		else
-			return false;
+	public Boolean getIsAtGoal() {
+		return isAtGoal;
 	}
 
 	/**
 	 * Reads png file and returns the image
+	 * 
 	 * @return returns image read for player object
 	 */
 	public static BufferedImage getImage() {
