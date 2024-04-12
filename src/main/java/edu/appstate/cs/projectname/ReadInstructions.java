@@ -24,7 +24,7 @@ public class ReadInstructions {
 	public static String readFile(String level) {
 		try {
 			String output = "";
-			List<String> lines = Files.readAllLines(Paths.get(filePathStr + "//level" + level + "Instr.txt"));
+			List<String> lines = Files.readAllLines(Paths.get(filePathStr + level));
 			for (String str : lines)
 				output += str + "\n";
 			return output;

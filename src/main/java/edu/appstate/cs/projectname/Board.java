@@ -44,7 +44,7 @@ public class Board {
 	 * @throws IOException if an I/O error occured while reading file.
 	 */
 	public static Board createBoardFromFile(String level) throws IOException {
-		BufferedReader reader = new BufferedReader(new FileReader(filePath + "//level" + level));
+		BufferedReader reader = new BufferedReader(new FileReader(filePath + level));
 		String line;
 
 		Board board = new Board();
