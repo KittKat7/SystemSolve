@@ -1,4 +1,4 @@
-package edu.appstate.cs.projectname;
+package edu.appstate.cs.codequest;
 
 import java.io.IOException;
 import java.nio.file.Files;
@@ -11,7 +11,7 @@ import java.util.List;
 public class ReadInstructions {
 
 	// String that contains the repeated parts of the path
-	private static String filePathStr = ".//src//main//java//edu//appstate//cs//projectname//Instructions";
+	private static String filePathStr = ".//src//main//java//edu//appstate//cs//codequest//Instructions";
 
 	/**
 	 * Method that takes the level as an int and

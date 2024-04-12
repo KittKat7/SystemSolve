@@ -3,7 +3,7 @@
  * (c) Team Beedrill 2024-03-27
  * Please refer to the license file
  */
-package edu.appstate.cs.projectname;
+package edu.appstate.cs.codequest;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
@@ -18,7 +18,7 @@ public class Board {
 	 * [a,b,c]]
 	 */
 	private GameObject[][] board;
-	private static String filePath = ".//src//main//java//edu//appstate//cs//projectname//maps";
+	private static String filePath = ".//src//main//java//edu//appstate//cs//codequest//maps";
 	private PlayerObject player;
 	private boolean hasGoal = false;
 

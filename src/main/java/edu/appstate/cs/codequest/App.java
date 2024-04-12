@@ -1,11 +1,10 @@
-package edu.appstate.cs.projectname;
+package edu.appstate.cs.codequest;
 
 /**
  * Hello world!
  *
  */
-public class App 
-{
+public class App {
 	public static int sum(int x, int y) {
 		return x + y;
 	}
@@ -14,12 +13,11 @@ public class App
 		if (denominator == 0) {
 			return 0.0f;
 		} else {
-			return (numerator*100.0f)/denominator;
+			return (numerator * 100.0f) / denominator;
 		}
 	}
 
-	public static void main( String[] args )
-	{
-		System.out.println( "Hello World!" );
+	public static void main(String[] args) {
+		System.out.println("Hello World!");
 	}
 }

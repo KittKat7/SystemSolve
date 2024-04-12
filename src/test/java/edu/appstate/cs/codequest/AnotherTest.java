@@ -1,11 +1,11 @@
-package edu.appstate.cs.projectname;
+package edu.appstate.cs.codequest;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import org.junit.jupiter.api.Test;
 
 public class AnotherTest {
-	
+
 	@Test
 	public void testNormalPercentComputation() {
 		float result = App.computePercent(50, 100);

@@ -1,4 +1,4 @@
-package edu.appstate.cs.projectname;
+package edu.appstate.cs.codequest;
 
 import java.awt.image.BufferedImage;
 import java.io.File;
@@ -49,7 +49,7 @@ public abstract class GameObject {
 	 */
 	public static BufferedImage getImage(String fileName) {
 		try {
-			File wall = new File("./src/main/resources/edu/appstate/cs/projectname/images/" + fileName);
+			File wall = new File("./src/main/resources/edu/appstate/cs/codequest/images/" + fileName);
 			return ImageIO.read(wall);
 		} catch (IOException e) {
 			return null;

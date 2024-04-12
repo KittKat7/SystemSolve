@@ -1,4 +1,4 @@
-package edu.appstate.cs.projectname;
+package edu.appstate.cs.codequest;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
