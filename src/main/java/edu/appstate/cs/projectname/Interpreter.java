@@ -7,29 +7,11 @@ import java.util.HashSet;
 public class Interpreter {
 	private static final HashSet<String> KEYWORDS = new HashSet<String>(Arrays.asList(
 			"var", "while", "moveUp", "moveDown", "moveLeft", "moveRight"));
-	private static Interpreter interpreter;
 	private PlayerObject player;
-
-	/**
-	 * A factory that returns the interpreter instance, or makes a new instance if
-	 * one does not exist.
-	 * 
-	 * @return The interpreter instance.
-	 */
-	public static Interpreter getInterpreter() {
-		if (interpreter == null)
-			interpreter = new Interpreter();
-		return interpreter;
-	}// getInterpreter()
 
 	HashMap<String, Integer> vars = new HashMap<String, Integer>();
 
-	/**
-	 * Set the player object for the interpreter.
-	 * 
-	 * @param player The player object to set.
-	 */
-	public void setPlayer(PlayerObject player) {
+	public Interpreter(PlayerObject player) {
 		this.player = player;
 	}
 
@@ -73,13 +55,13 @@ public class Interpreter {
 		} else if (vars.keySet().contains(parts[0]))
 			; // TODO: modifying var
 		else if (line == "moveUp")
-			; // TODO: move up
+			player.move("up");
 		else if (line == "moveLeft")
-			; // TODO: move left
+			player.move("left");
 		else if (line == "moveRight")
-			; // TODO: move right
+			player.move("right");
 		else if (line == "moveDown")
-			; // TODO: move down
+			player.move("down");
 		else
 			throw new InterpretingException("Unknown command '" + line + "'");
 	}// parseLine()
