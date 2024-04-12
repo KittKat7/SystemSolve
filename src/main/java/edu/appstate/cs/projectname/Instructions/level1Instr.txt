@@ -1,17 +1,12 @@
-Hello and Welcome to Code Quest!
-Code Quest is an interactive learning platform
-that teaches basic coding logic in a game format.
+As a technician navigating the data center's system, you find 
+yourself at a critical juncture. The catastrophic failure has left your
+communications with the central process sporadic at best. To ensure your 
+safety and the integrity of the system, you must adhere to basic, 
+singular commands. 
 
-The backstory: A data center suffers a critical system failure. 
-Almost all systems are shutdown or no longer functional. 
-You are a technician employed for the data center. 
-Your job is to get the system up and running again. 
-You have a single process that you have control of, 
-but you only have intermittent contact with this process. 
-You must write code to navigate this process through the 
-failed systems and get them up and running.For now you must 
-reboot the system by guiding yourself through the 
-computer system with simple commands.
+Navigate your character to the reboot point by issuing single commands 
+("Up", "Down", "Left", or "Right").
 
-Please input one of the following commands: Up, Down, Left, Right.
-Then, press the Submit Button.
+Input one command at a time, and press the submit button to move in the 
+respective direction. Continue issuing commands until you reach the 
+reboot point, once you have the next level button will become available.
