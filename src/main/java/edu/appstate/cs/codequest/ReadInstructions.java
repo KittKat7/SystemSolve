@@ -11,7 +11,7 @@ import java.util.List;
 public class ReadInstructions {
 
 	// String that contains the repeated parts of the path
-	private static String filePathStr = Resource.resourcePath + "Instructions";
+	private static String filePathStr = Resource.resourcePath + "Instructions/";
 
 	/**
 	 * Method that takes the level as an int and

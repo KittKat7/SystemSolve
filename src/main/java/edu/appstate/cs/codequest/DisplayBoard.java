@@ -72,8 +72,8 @@ public class DisplayBoard extends JPanel implements Runnable {
 	public void startGame() throws IOException {
 		gameThread = new Thread(this);
 		gameThread.start();
-		board = Board.createBoardFromFile(level);
-		instructionsPane.setText(RunGame.getInstructions(level));
+		board = Board.createBoardFromFile("level0");
+		instructionsPane.setText(RunGame.getInstructions("level0Instr.txt"));
 	}
 
 	/**
