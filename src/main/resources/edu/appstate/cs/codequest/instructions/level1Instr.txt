@@ -1,17 +1,11 @@
-Hello and Welcome to Code Quest!
-Code Quest is an interactive learning platform
-that teaches basic coding logic in a game format.
+Level 1
 
-The backstory: A data center suffers a critical system failure. 
-Almost all systems are shutdown or no longer functional. 
-You are a technician employed for the data center. 
-Your job is to get the system up and running again. 
-You have a single process that you have control of, 
-but you only have intermittent contact with this process. 
-You must write code to navigate this process through the 
-failed systems and get them up and running.
+When you program, you are essentially giving
+the computer commands to do something, or
+you are giving the comuter data to do 
+somthing with. For now you only have the most
+basic control over the computer, and can only 
+communicate with direct instructions. 
 
-For now you must reboot the system by guiding yourself through the 
-computer system with simple commands.
-
-Please input one of the following commands: Up, Down, Left, Right.
+Please enter one of the following commands:
+Up, Down, Left or Right
