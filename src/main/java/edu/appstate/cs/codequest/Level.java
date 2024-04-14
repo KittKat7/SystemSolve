@@ -23,4 +23,13 @@ public class Level {
 		interpreter = new Interpreter(player);
 	}
 
+	/**
+	 * Returns true if the player is at the goal, and false otherwise.
+	 * 
+	 * @return True if the player is at the goal, or false otherwise.
+	 */
+	public boolean getIsAtGoal() {
+		return player.getIsAtGoal();
+	}
+
 }

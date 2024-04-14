@@ -68,19 +68,19 @@ public class PlayerObject extends GameObject {
 		// coordinates in the board array.
 		if (newX != x || newY != y) {
 			if (isAtGoal && board.getHasGoal()) {
-				board.setObject("Goal", x, y);
+				board.setObject(new GoalObject(), x, y);
 				isAtGoal = false;
 			} else if (isAtGoal && !board.getHasGoal()) {
-				board.setObject("Path", x, y);
+				board.setObject(new PathObject(), x, y);
 				isAtGoal = true;
 			} else {
-				board.setObject("Path", x, y);
+				board.setObject(new PathObject(), x, y);
 				if (board.getObject(newX, newY) instanceof GoalObject)
 					isAtGoal = false;
 			}
 			x = newX;
 			y = newY;
-			board.setObject("Player", x, y);
+			board.setObject(this, x, y);
 		}
 	}
 
