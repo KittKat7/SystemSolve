@@ -114,13 +114,20 @@ public class RunGame {
 		submitButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				String getInput = inputArea.getText();
-				gameBoard.level.runCode(getInput);
 				System.out.print(getInput);
+				// Create a new thread for updating the movement to prevent locking the
+				// displaying.
+				Thread t1 = new Thread(new Runnable() {
+					public void run() {
+						gameBoard.level.runCode(getInput);
+					}
+				});
+				t1.start();
 			}
 		});
 	}
 
-	public static void isAtGoalRG(boolean bo){
+	public static void isAtGoalRG(boolean bo) {
 		b = bo;
 	}
 

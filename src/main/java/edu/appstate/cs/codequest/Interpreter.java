@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.concurrent.TimeUnit;
 
 public class Interpreter {
 	private static final HashSet<String> KEYWORDS = new HashSet<String>(Arrays.asList(
@@ -11,11 +12,14 @@ public class Interpreter {
 	private PlayerObject player;
 	private Board board;
 
+	private boolean isInterpreting;
+
 	ArrayList<String> lines = new ArrayList<>();
 
 	public Interpreter(PlayerObject player, Board board) {
 		this.player = player;
 		this.board = board;
+		isInterpreting = false;
 	}
 
 	/**
@@ -27,9 +31,17 @@ public class Interpreter {
 	 * @return The completion/error message as a result of parsing the string.
 	 */
 	public void parse(String str) throws InterpretingException {
-		lines = new ArrayList<String>(Arrays.asList(str.split("\n")));
-		while (lines.size() > 0) {
-			parseLine();
+		if (isInterpreting)
+			return;
+		try {
+			isInterpreting = true;
+			lines = new ArrayList<String>(Arrays.asList(str.split("\n")));
+			while (lines.size() > 0) {
+				parseLine();
+			}
+		} catch (Exception e) {
+			isInterpreting = false;
+			throw e;
 		}
 	}// parse(String)
 
@@ -41,10 +53,15 @@ public class Interpreter {
 	 * @return Either an empty string, or an error message
 	 */
 	private void parseLine() throws InterpretingException {
+		try {
+			Thread.sleep(1000);
+		} catch (InterruptedException e) {
+			Thread.currentThread().interrupt();
+		}
 		String line = lines.get(0);
 		lines.remove(0);
 		// Comment
-		if (line.startsWith("#"))
+		if (line.startsWith("#") || line.trim().isEmpty())
 			return;
 		// Movement
 		else if (line.startsWith("move")) {
@@ -67,7 +84,8 @@ public class Interpreter {
 		}
 		// If statement
 		else if (line.startsWith("if ")) {
-			boolean condition = parseCondition(line.substring(3).trim());
+			// Remove the 'if ' and the ':'
+			boolean condition = parseCondition(line.trim().substring(0, line.trim().length() - 1).substring(3));
 			while (lines.get(0).startsWith("\t") || lines.get(0).startsWith("#")) {
 				if (condition)
 					parseLine();
