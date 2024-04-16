@@ -40,8 +40,9 @@ public class Interpreter {
 				parseLine();
 			}
 		} catch (Exception e) {
-			isInterpreting = false;
 			throw e;
+		} finally {
+			isInterpreting = false;
 		}
 	}// parse(String)
 
