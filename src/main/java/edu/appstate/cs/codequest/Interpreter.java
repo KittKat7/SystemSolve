@@ -1,18 +1,21 @@
 package edu.appstate.cs.codequest;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.HashSet;
 
 public class Interpreter {
 	private static final HashSet<String> KEYWORDS = new HashSet<String>(Arrays.asList(
-			"var", "while", "moveUp", "moveDown", "moveLeft", "moveRight"));
+			"var", "while", "moveU", "moveD", "moveL", "moveR"));
 	private PlayerObject player;
+	private Board board;
 
-	HashMap<String, Integer> vars = new HashMap<String, Integer>();
+	ArrayList<String> lines = new ArrayList<>();
 
-	public Interpreter(PlayerObject player) {
+	public Interpreter(PlayerObject player, Board board) {
 		this.player = player;
+		this.board = board;
 	}
 
 	/**
@@ -23,15 +26,10 @@ public class Interpreter {
 	 * @param str The command/script the player entered.
 	 * @return The completion/error message as a result of parsing the string.
 	 */
-	public void parse(String str) {
-		String[] lines = str.split("\n");
-		try {
-			for (String line : lines) {
-				parseLine(line);
-			}
-		} catch (InterpretingException e) {
-			System.out.println("An exception in the code was encountered.");
-			System.out.println(e.getMessage());
+	public void parse(String str) throws InterpretingException {
+		lines = new ArrayList<String>(Arrays.asList(str.split("\n")));
+		while (lines.size() > 0) {
+			parseLine();
 		}
 	}// parse(String)
 
@@ -42,29 +40,69 @@ public class Interpreter {
 	 * @param line The command to parse
 	 * @return Either an empty string, or an error message
 	 */
-	private void parseLine(String line) throws InterpretingException {
-		String[] parts = line.split(" ");
-		// Variable detetion
-		if (parts[0] == "var") {
-			if (KEYWORDS.contains(parts[1]))
-				throw new InterpretingException("Trying to use keyword as variable name '" + parts[1] + "'");
-			else if (vars.keySet().contains(parts[1]))
-				throw new InterpretingException("Variable " + parts[1]);
-			else
-				vars.put(parts[1], Integer.parseInt(parts[2]));
-		} else if (vars.keySet().contains(parts[0]))
-			; // TODO: modifying var
-		else if (line == "moveUp")
-			player.move("up");
-		else if (line == "moveLeft")
-			player.move("left");
-		else if (line == "moveRight")
-			player.move("right");
-		else if (line == "moveDown")
-			player.move("down");
+	private void parseLine() throws InterpretingException {
+		String line = lines.get(0);
+		lines.remove(0);
+		// Comment
+		if (line.startsWith("#"))
+			return;
+		// Movement
+		else if (line.startsWith("move")) {
+			switch (line.substring("move".length())) {
+				case "U":
+					player.move("up");
+					break;
+				case "D":
+					player.move("down");
+					break;
+				case "L":
+					player.move("left");
+					break;
+				case "R":
+					player.move("right");
+					break;
+				default:
+					throw new InterpretingException("Missing move direction, IE `moveU`");
+			}
+		}
+		// If statement
+		else if (line.startsWith("if ")) {
+			boolean condition = parseCondition(line.substring(3).trim());
+			while (lines.get(0).startsWith("\t") || lines.get(0).startsWith("#")) {
+				if (condition)
+					parseLine();
+				else
+					lines.remove(0);
+			}
+		}
+		// Unknown
 		else
 			throw new InterpretingException("Unknown command '" + line + "'");
 	}// parseLine()
+
+	/**
+	 * Parses the passed condition, and returns true or false depending on the
+	 * condition.
+	 * 
+	 * @param condition
+	 * @return True or false depending on the provided condition.
+	 */
+	private boolean parseCondition(String condition) throws InterpretingException {
+		switch (condition) {
+			case "isOnGoal":
+				return player.getIsAtGoal();
+			case "canMoveU":
+				return player.canMove('U');
+			case "canMoveD":
+				return player.canMove('D');
+			case "canMoveL":
+				return player.canMove('L');
+			case "canMoveR":
+				return player.canMove('R');
+			default:
+				throw new InterpretingException("Unknown condition `" + condition + "`");
+		}
+	}
 
 }// Interpreter
 

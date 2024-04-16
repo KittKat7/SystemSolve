@@ -20,7 +20,7 @@ public class Level {
 		this.index = index;
 		board = Board.createBoardFromFile("level" + index);
 		player = board.getPlayer();
-		interpreter = new Interpreter(player);
+		interpreter = new Interpreter(player, board);
 	}
 
 	/**
@@ -30,6 +30,20 @@ public class Level {
 	 */
 	public boolean getIsAtGoal() {
 		return player.getIsAtGoal();
+	}
+
+	/**
+	 * Runs the provided code.
+	 * 
+	 * @param str The code which is to be run.
+	 */
+	public void runCode(String str) {
+		try {
+			interpreter.parse(str);
+		} catch (InterpretingException e) {
+			System.out.println("An exception in the code was encountered.");
+			System.out.println(e.getMessage());
+		}
 	}
 
 }

@@ -87,7 +87,7 @@ public class PlayerObject extends GameObject {
 	/*
 	 * Test if the players location is the same as the goals
 	 */
-	public Boolean getIsAtGoal() {
+	public boolean getIsAtGoal() {
 		return isAtGoal;
 	}
 
@@ -98,5 +98,27 @@ public class PlayerObject extends GameObject {
 	 */
 	public static BufferedImage getImage() {
 		return getImage("player.png");
+	}
+
+	/**
+	 * Checks whether the player can move in a given direction, returns true if yes
+	 * and false otherwise. 'U' up, 'D' down, 'L' left, 'R' right
+	 * 
+	 * @param direction
+	 * @return True if the player can move that direction, false otherwise.
+	 */
+	public boolean canMove(char direction) {
+		switch (direction) {
+			case 'U':
+				return board.canMove(x, y - 1);
+			case 'D':
+				return board.canMove(x, y + 1);
+			case 'L':
+				return board.canMove(x - 1, y);
+			case 'R':
+				return board.canMove(x + 1, y);
+			default:
+				return false;
+		}
 	}
 }
