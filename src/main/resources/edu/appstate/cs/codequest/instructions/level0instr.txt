@@ -13,4 +13,4 @@ failed systems and get them up and running.For now you must
 reboot the system by guiding yourself through the 
 computer system with simple commands.
 
-Hit the nextLevel button to continue.
+Hit the NextLevel button to continue.

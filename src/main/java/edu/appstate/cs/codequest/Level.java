@@ -32,6 +32,11 @@ public class Level {
 		return player.getIsAtGoal();
 	}
 
+	public Board getBoard()
+	{
+		return board;
+	}
+	
 	/**
 	 * Runs the provided code.
 	 * 

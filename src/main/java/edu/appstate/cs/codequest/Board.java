@@ -17,7 +17,7 @@ public class Board {
 	 * [a,b,c],
 	 * [a,b,c]]
 	 */
-	private GameObject[][] board;
+	GameObject[][] board;
 	private static String filePath = Resource.resourcePath + "maps/";
 	private PlayerObject player;
 	private boolean hasGoal = false;

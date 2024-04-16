@@ -23,7 +23,8 @@ public class DisplayBoard extends JPanel implements Runnable {
 	private final int screenWidth = tileSize * maxScreenCol; // 768 pixels aka 16 48x48 tiles
 	private final int screenHeight = tileSize * maxScreenRow; // 576 pixels aka 12 48x48 tiles
 	private final int FPS = 60;
-	private static String level = "0"; // temporary
+	Level level; // temporary
+	private int index = 0;
 	static Boolean playerAtGoalB = false; // temporary
 	static Boolean button = false;
 
@@ -35,22 +36,23 @@ public class DisplayBoard extends JPanel implements Runnable {
 	Thread gameThread;
 
 	// Constructor that sets JPanel Parameters
-	DisplayBoard() {
+	DisplayBoard() throws IOException {
 		this.setPreferredSize(new Dimension(screenWidth, screenHeight));
 		this.setBackground(Color.black);
 		this.setDoubleBuffered(true);
 		this.setFocusable(true);
+		level = new Level(index);
 	}
 
 	// sets level
 	// temporary until level class is implemeted
-	public void setLevel(String i) {
-		level = i;
+	public void setIndex(int i) {
+		index = i;
 	}
 
 	// temporary untili level class is implemented
-	public String getLevel() {
-		return level;
+	public int getIndex() {
+		return index;
 	}
 
 	// creates a JTextPane to update
@@ -72,8 +74,9 @@ public class DisplayBoard extends JPanel implements Runnable {
 	public void startGame() throws IOException {
 		gameThread = new Thread(this);
 		gameThread.start();
-		board = Board.createBoardFromFile("level0");
-		instructionsPane.setText(RunGame.getInstructions("level0Instr.txt"));
+		level = new Level(index);
+		board = level.getBoard();
+		instructionsPane.setText(RunGame.getInstructions(index));
 	}
 
 	/**
@@ -121,11 +124,10 @@ public class DisplayBoard extends JPanel implements Runnable {
 	 * @throws IOException
 	 */
 	private void update() throws IOException {
-		playerAtGoalB = board.getPlayer().getIsAtGoal();
 		if (button == true) {
-			board = Board.createBoardFromFile(level);
-			// gameBoard = board.getBoard();
-			instructionsPane.setText(RunGame.getInstructions(level));
+			level = new Level(index);
+			board = level.getBoard();
+			instructionsPane.setText(RunGame.getInstructions(index));
 			button = false;
 		}
 	}

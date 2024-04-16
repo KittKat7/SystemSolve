@@ -66,15 +66,14 @@ public class RunGame {
 		textAreaJPanel.add(submitButton, BorderLayout.CENTER);
 
 		// temporary until movement is done
-		b = true;
-
+		boolean b = true;
 		// Will test for player at goal and add the appropriate button.
 		if (!b) {
 			textAreaJPanel.add(resetButton, BorderLayout.SOUTH);
 			resetButton.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
 					gameBoard.setButton(true);
-					gameBoard.setLevel(gameBoard.getLevel());
+					gameBoard.setIndex(gameBoard.getIndex());
 					inputArea.setText("");
 				}
 			});
@@ -83,9 +82,11 @@ public class RunGame {
 			textAreaJPanel.add(nextLevelButton, BorderLayout.SOUTH);
 
 			nextLevelButton.addActionListener(new ActionListener() {
+				@Override
 				public void actionPerformed(ActionEvent e) {
 					gameBoard.setButton(true);
-					gameBoard.setLevel(Integer.toString(Integer.parseInt(gameBoard.getLevel()) + 1));
+					gameBoard.setIndex(gameBoard.getIndex() + 1);
+					isAtGoalRG(gameBoard.level.getIsAtGoal());
 				}
 			});
 		}
@@ -113,12 +114,14 @@ public class RunGame {
 		submitButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				String getInput = inputArea.getText();
-				// will pass to interpreter
-				// System.out.print(getInput + PlayerObject.getIsAtGoal()); // TODO: move to
-				// interact with Level
+				gameBoard.level.runCode(getInput);
 				System.out.print(getInput);
 			}
 		});
+	}
+
+	public static void isAtGoalRG(boolean bo){
+		b = bo;
 	}
 
 	// returns user input as a string
@@ -132,8 +135,8 @@ public class RunGame {
 	 * 
 	 * @return returns Instructions String
 	 */
-	public static String getInstructions(String s) {
-		String instr = ReadInstructions.readFile(s);
+	public static String getInstructions(int index) {
+		String instr = ReadInstructions.readFile(Integer.toString(index));
 		return instr;
 	}
 }
