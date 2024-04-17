@@ -9,9 +9,15 @@ main {
 	background-color: gray;
 }
 
-pre code {
+code {
 	background-color: lightgray;
 	border-radius: 10px;
+	padding-left: 10px;
+	padding-right: 10px;
+	margin: 5px;
+}
+
+pre code {
 	display: block;
 	/* background: none; */
 	white-space: pre;
@@ -19,6 +25,4 @@ pre code {
 	/* overflow-x: scroll; */
 	max-width: 100%;
 	min-width: 100px;
-	padding-left: 20px;
-	padding-right: 20px;
 }

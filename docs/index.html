@@ -14,25 +14,45 @@
 
 		<p>
 		<h3>Movement commands</h3>
-		Controls the movement of the player.
-		<pre><code>moveU</code></pre>
-		<pre><code>moveD</code></pre>
-		<pre><code>moveR</code></pre>
-		<pre><code>moveL</code></pre>
+		Controls the movement of the character.
+		<br>
+		Every time one of these commands is run, the character will attempt to move in the designated direction.
 		</p>
 		<p>
-		<h3>Conditionals</h3>
-		<pre><code>isOnGoal</code></pre>
-		<pre><code>canMoveU</code></pre>
-		<pre><code>canMoveD</code></pre>
-		<pre><code>canMoveL</code></pre>
-		<pre><code>canMoveR</code></pre>
+			<code>moveU</code> Move the character one tile up
+			<br>
+			<code>moveD</code> Move the character one tile down
+			<br>
+			<code>moveL</code> Move the character one tile left
+			<br>
+			<code>moveR</code> Move the player one tile right
+		</p>
+
+		<p>
+		<h3>Conditions</h3>
+		A condition is a true or false value depending one some condition. These conditions are used in if statements
+		and while loops to determine its behavior. If the condition for the if statement is true, then the if statement
+		will run, otherwise the if's code will be skipped. If statements can also be negated by using <code>!</code> in
+		front of the condition. For example <code>isOnGoal</code> is true if the player is on the goal, however
+		<code>!isOnGoal</code> is true if the player is NOT on the goal.
+		</p>
+		<p>
+			<code>canMoveU</code> Is true if the player can move up
+			<br>
+			<code>canMoveD</code> Is true if the player can move down
+			<br>
+			<code>canMoveL</code> Is true if the player can move left
+			<br>
+			<code>canMoveR</code> Is true if the player can move right
+			<br>
+			<code>isOnGoal</code> Is true if the character is on the goal, or the map has no goal.
 		</p>
 		<p>
 		<h3>If statements</h3>
 		<pre><code>
 if canMoveU:
 	moveU
+fi
 		</code></pre>
 		</p>
 		<p>
@@ -40,6 +60,7 @@ if canMoveU:
 		<pre><code>
 while canMoveU:
 	moveU
+elihw
 		</code></pre>
 		</p>
 
