@@ -32,11 +32,15 @@ public class Level {
 		return player.getIsAtGoal();
 	}
 
+	/**
+	 * Returns the Level instance of board
+	 * @return board object
+	 */
 	public Board getBoard()
 	{
 		return board;
 	}
-	
+
 	/**
 	 * Runs the provided code.
 	 * 
