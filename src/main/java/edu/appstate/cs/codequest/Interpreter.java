@@ -54,18 +54,18 @@ public class Interpreter {
 	 * @return Either an empty string, or an error message
 	 */
 	private void parseLine() throws InterpretingException {
-		try {
-			Thread.sleep(1000);
-		} catch (InterruptedException e) {
-			Thread.currentThread().interrupt();
-		}
-		String line = lines.get(0);
+		String line = lines.get(0).trim();
 		lines.remove(0);
 		// Comment
-		if (line.startsWith("#") || line.trim().isEmpty())
+		if (line.startsWith("#") || line.isEmpty())
 			return;
 		// Movement
 		else if (line.startsWith("move")) {
+			try {
+				Thread.sleep(500);
+			} catch (InterruptedException e) {
+				Thread.currentThread().interrupt();
+			}
 			switch (line.substring("move".length())) {
 				case "U":
 					player.move("up");
@@ -86,13 +86,40 @@ public class Interpreter {
 		// If statement
 		else if (line.startsWith("if ")) {
 			// Remove the 'if ' and the ':'
-			boolean condition = parseCondition(line.trim().substring(0, line.trim().length() - 1).substring(3));
-			while (lines.get(0).startsWith("\t") || lines.get(0).startsWith("#")) {
+			boolean condition = parseCondition(
+					line.trim().substring(0, line.trim().length() - 1).substring("if ".length()));
+			while (!lines.get(0).startsWith("fi")) {
 				if (condition)
 					parseLine();
 				else
 					lines.remove(0);
 			}
+			lines.remove(0);
+		}
+		// While loop
+		else if (line.startsWith("while ")) {
+			// Remove the 'if ' and the ':'
+			String conditionStr = line.trim().substring(0, line.trim().length() - 1).substring("while ".length());
+			ArrayList<String> loopedcode = new ArrayList<String>();
+			while (!lines.get(0).startsWith("elihw")) {
+				loopedcode.add(lines.get(0));
+				lines.remove(0);
+			}
+			System.out.println("HELLO WORLD");
+			while (parseCondition(conditionStr)) {
+				lines.addAll(0, loopedcode);
+				System.out.println(lines);
+
+				while (true) {
+					if (lines.get(0).startsWith("elihw"))
+						break;
+					System.out.println(lines);
+					System.out.println("<" + lines.get(0) + ">");
+					System.out.println(lines.get(0) != "elihw");
+					parseLine();
+				}
+			}
+			lines.remove(0);
 		}
 		// Unknown
 		else
@@ -103,24 +130,37 @@ public class Interpreter {
 	 * Parses the passed condition, and returns true or false depending on the
 	 * condition.
 	 * 
-	 * @param condition
+	 * @param str
 	 * @return True or false depending on the provided condition.
 	 */
-	private boolean parseCondition(String condition) throws InterpretingException {
-		switch (condition) {
+	private boolean parseCondition(String str) throws InterpretingException {
+		boolean condition = false;
+		boolean negated = str.startsWith("!");
+		if (negated)
+			str = str.substring(1);
+		switch (str) {
 			case "isOnGoal":
-				return player.getIsAtGoal();
+				condition = player.getIsAtGoal();
+				break;
 			case "canMoveU":
-				return player.canMove('U');
+				condition = player.canMove('U');
+				break;
 			case "canMoveD":
-				return player.canMove('D');
+				condition = player.canMove('D');
+				break;
 			case "canMoveL":
-				return player.canMove('L');
+				condition = player.canMove('L');
+				break;
 			case "canMoveR":
-				return player.canMove('R');
+				condition = player.canMove('R');
+				break;
 			default:
-				throw new InterpretingException("Unknown condition `" + condition + "`");
+				throw new InterpretingException("Unknown condition `" + str + "`");
 		}
+		if (!negated)
+			return condition;
+		else
+			return !condition;
 	}
 
 }// Interpreter

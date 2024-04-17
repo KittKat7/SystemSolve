@@ -11,6 +11,9 @@ import java.io.IOException;
 
 public class Board {
 
+	public static final int WIDTH = 16;
+	public static final int HEIGHT = 12;
+
 	/*
 	 * row: y, col: x
 	 * [[a,b,c],
@@ -26,7 +29,7 @@ public class Board {
 	 * Initialized the board with a width of 16 and height of 12.
 	 */
 	Board() {
-		board = new GameObject[12][16];
+		board = new GameObject[HEIGHT][WIDTH];
 	}// Board()
 
 	/**
@@ -34,7 +37,7 @@ public class Board {
 	 * for width and height.
 	 */
 	Board(int x, int y) {
-		board = new GameObject[x][y];
+		board = new GameObject[y][x];
 	}// Board(int x, int y)
 
 	/**
@@ -173,7 +176,11 @@ public class Board {
 	 * @return A boolean representing whether the tile can be moved to
 	 */
 	public boolean canMove(int x, int y) {
-		return getObject(x, y) == null || !getObject(x, y).getIsObstacle();
-	}// canMove(int, int
+		return inBounds(x, y) && (getObject(x, y) == null || !getObject(x, y).getIsObstacle());
+	}
+
+	public boolean inBounds(int x, int y) {
+		return x >= 0 && x < WIDTH && y >= 0 && y < HEIGHT;
+	}
 
 }// Board
