@@ -8,6 +8,6 @@ this system.
 You can no longer issue singular commands one by one. 
 
 Write a script using a series of directional commands
-("Up", "Down", "Left", "Right"), each on a new line, to effeciently 
+("MoveU", "MoveD", "MoveL", "MoveR"), each on a new line, to  
 navigate your character to the reboot point. Press the submit button 
 to execute your script and observe your character's movement. 

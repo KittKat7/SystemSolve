@@ -6,11 +6,9 @@ capable of maintaining stability through this section of the
 system.
 
 You can no longer issue direct commands without a pre-condition.
+Check if player isOnGoal before moving. 
 
-Write a script with a while loop by checking the t/f condition 
-"blockInfront isPassable," use it to iterate until your character 
-reaches the reboot point. Use directional commands ("Up", "Down",
-"Left", "Right") nested under a while loop to iterate through the 
+Write a script with a while loop to iterate until your character 
+reaches the reboot point. Use directional commands ("MoveU", "MoveD",
+"MoveL", "MoveR") nested under a while loop to iterate through the 
 system. 
-
-

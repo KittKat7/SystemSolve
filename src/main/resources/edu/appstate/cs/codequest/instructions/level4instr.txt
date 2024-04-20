@@ -8,6 +8,5 @@ progress.
 Your task is to navigate through the system to the reboot point, 
 like before, but you will now need to use if statements to 
 meet authentication critera. Use if statements to check if 
-the block in front of you is passable. 
-
-
+the player can move ("canMoveU", "canMoveD", "canMoveL", 
+"canMoveR") before moving. 
