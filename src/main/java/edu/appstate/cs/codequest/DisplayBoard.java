@@ -6,6 +6,7 @@ import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.io.IOException;
 
+import javax.swing.JButton;
 import javax.swing.JPanel;
 import javax.swing.JTextPane;
 
@@ -27,7 +28,7 @@ public class DisplayBoard extends JPanel implements Runnable {
 	private int index = 0;
 	static Boolean playerAtGoalB = false; // temporary
 	static Boolean button = false;
-
+	JButton levelButton = new JButton();
 	// Board obj and GameOnject array of objects
 	public Board board = new Board(maxScreenCol, maxScreenRow);
 
@@ -129,6 +130,13 @@ public class DisplayBoard extends JPanel implements Runnable {
 			board = level.getBoard();
 			instructionsPane.setText(RunGame.getInstructions(index));
 			button = false;
+		}
+		if(!level.getIsAtGoal()){
+			levelButton.setText("Reset");
+		}
+		else if(level.getIsAtGoal())
+		{
+			levelButton.setText("Next Level");
 		}
 	}
 

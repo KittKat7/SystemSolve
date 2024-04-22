@@ -55,10 +55,7 @@ public class RunGame {
 		// Buttons for users to press
 		JButton submitButton = new JButton();
 		submitButton.setText("Submit");
-		JButton nextLevelButton = new JButton();
-		nextLevelButton.setText("Next Level");
-		JButton resetButton = new JButton();
-		resetButton.setText("Reset");
+		JButton levelButton = gameBoard.levelButton;
 
 		// adds text area and submit button to panel
 		textAreaJPanel.setLayout(new BorderLayout());
@@ -66,30 +63,21 @@ public class RunGame {
 		textAreaJPanel.add(submitButton, BorderLayout.CENTER);
 
 		// temporary until movement is done
-		boolean b = true;
 		// Will test for player at goal and add the appropriate button.
-		if (!b) {
-			textAreaJPanel.add(resetButton, BorderLayout.SOUTH);
-			resetButton.addActionListener(new ActionListener() {
-				public void actionPerformed(ActionEvent e) {
-					gameBoard.setButton(true);
+		textAreaJPanel.add(levelButton, BorderLayout.SOUTH);
+		levelButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				gameBoard.setButton(true);
+				if(levelButton.getText().equals("Reset")){
 					gameBoard.setIndex(gameBoard.getIndex());
 					inputArea.setText("");
 				}
-			});
-		} else if (b)// if(DisplayBoard.playerAtGoal)
-		{
-			textAreaJPanel.add(nextLevelButton, BorderLayout.SOUTH);
-
-			nextLevelButton.addActionListener(new ActionListener() {
-				@Override
-				public void actionPerformed(ActionEvent e) {
-					gameBoard.setButton(true);
+				else
+				{
 					gameBoard.setIndex(gameBoard.getIndex() + 1);
-					isAtGoalRG(gameBoard.level.getIsAtGoal());
 				}
-			});
-		}
+			}
+		});
 
 		// adds instructions panel and text area panel to the top/botton of
 		// the split area

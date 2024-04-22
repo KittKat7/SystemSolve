@@ -76,7 +76,7 @@ public class PlayerObject extends GameObject {
 			} else {
 				board.setObject(new PathObject(), x, y);
 				if (board.getObject(newX, newY) instanceof GoalObject)
-					isAtGoal = false;
+					isAtGoal = true;
 			}
 			x = newX;
 			y = newY;
