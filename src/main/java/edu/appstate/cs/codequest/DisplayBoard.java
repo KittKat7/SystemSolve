@@ -77,7 +77,7 @@ public class DisplayBoard extends JPanel implements Runnable {
 		gameThread.start();
 		level = new Level(index);
 		board = level.getBoard();
-		instructionsPane.setText(RunGame.getInstructions(index));
+		instructionsPane.setText(App.getInstructions(index));
 	}
 
 	/**
@@ -128,14 +128,12 @@ public class DisplayBoard extends JPanel implements Runnable {
 		if (button == true) {
 			level = new Level(index);
 			board = level.getBoard();
-			instructionsPane.setText(RunGame.getInstructions(index));
+			instructionsPane.setText(App.getInstructions(index));
 			button = false;
 		}
-		if(!level.getIsAtGoal()){
+		if (!level.getIsAtGoal()) {
 			levelButton.setText("Reset");
-		}
-		else if(level.getIsAtGoal())
-		{
+		} else if (level.getIsAtGoal()) {
 			levelButton.setText("Next Level");
 		}
 	}
