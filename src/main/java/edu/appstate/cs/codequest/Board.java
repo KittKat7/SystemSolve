@@ -131,7 +131,7 @@ public class Board {
 		// default:
 		// System.out.println("Invalid object type");
 		// return;
-		// }
+		// 
 		board[y][x] = object;
 	}
 
