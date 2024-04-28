@@ -114,27 +114,14 @@ public class Board {
 	 */
 	public void setObject(GameObject object, int x, int y) {
 
-		// GameObject gameObject;
-		// switch (object) {
-		// case "Path":
-		// gameObject = new PathObject();
-		// break;
-		// case "Wall":
-		// gameObject = new WallObject();
-		// break;
-		// case "Goal":
-		// gameObject = new GoalObject();
-		// break;
-		// case "Player":
-		// gameObject = new PlayerObject(this, x, y);
-		// break;
-		// default:
-		// System.out.println("Invalid object type");
-		// return;
-		//
+		if (board[y][x] instanceof GoalObject)
+			hasGoal = false;
+
 		board[y][x] = object;
 		if (object instanceof PlayerObject)
 			player = (PlayerObject) object;
+		else if (object instanceof GoalObject)
+			hasGoal = true;
 	}
 
 	/**
