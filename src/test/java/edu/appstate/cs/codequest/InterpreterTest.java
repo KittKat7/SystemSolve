@@ -1,6 +1,7 @@
 package edu.appstate.cs.codequest;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.fail;
 
 import java.io.IOException;
 
@@ -42,7 +43,7 @@ public class InterpreterTest {
 	@Test
 	public void testMoveUpCommand() {
 		if (!initInterpreter()) {
-			assertTrue(false, "Failed to init the interpreter");
+			fail("Failed to init the interpreter");
 			return;
 		}
 
@@ -50,7 +51,7 @@ public class InterpreterTest {
 			inter.parse("moveU");
 		} catch (Exception e) {
 			e.printStackTrace();
-			assertTrue(false, "IterpreterException occured");
+			fail("IterpreterException occured");
 			return;
 		}
 		assertTrue(board.getObject(x, y - 1) instanceof PlayerObject, "Failed to move player up");
@@ -59,14 +60,14 @@ public class InterpreterTest {
 	@Test
 	public void testMoveDownCommand() {
 		if (!initInterpreter()) {
-			assertTrue(false, "Failed to init the interpreter");
+			fail("Failed to init the interpreter");
 			return;
 		}
 
 		try {
 			inter.parse("moveD");
 		} catch (Exception e) {
-			assertTrue(false, "IterpreterException occured");
+			fail("IterpreterException occured");
 			return;
 		}
 		assertTrue(board.getObject(x, y + 1) instanceof PlayerObject, "Failed to move player down");
@@ -75,14 +76,14 @@ public class InterpreterTest {
 	@Test
 	public void testMoveLeftCommand() {
 		if (!initInterpreter()) {
-			assertTrue(false, "Failed to init the interpreter");
+			fail("Failed to init the interpreter");
 			return;
 		}
 
 		try {
 			inter.parse("moveL");
 		} catch (Exception e) {
-			assertTrue(false, "IterpreterException occured");
+			fail("IterpreterException occured");
 			return;
 		}
 		assertTrue(board.getObject(x - 1, y) instanceof PlayerObject, "Failed to move player left");
@@ -91,14 +92,14 @@ public class InterpreterTest {
 	@Test
 	public void testMoveRightCommand() {
 		if (!initInterpreter()) {
-			assertTrue(false, "Failed to init the interpreter");
+			fail("Failed to init the interpreter");
 			return;
 		}
 
 		try {
 			inter.parse("moveR");
 		} catch (Exception e) {
-			assertTrue(false, "IterpreterException occured");
+			fail("IterpreterException occured");
 			return;
 		}
 		assertTrue(board.getObject(x + 1, y) instanceof PlayerObject, "Failed to move player right");
@@ -109,7 +110,7 @@ public class InterpreterTest {
 	@Test
 	public void testIsOnGoal() {
 		if (!initInterpreter()) {
-			assertTrue(false, "Failed to init the interpreter");
+			fail("Failed to init the interpreter");
 			return;
 		}
 
@@ -118,7 +119,7 @@ public class InterpreterTest {
 		try {
 			inter.parse("moveD\nmoveR");
 		} catch (Exception e) {
-			assertTrue(false, "IterpreterException occured");
+			fail("IterpreterException occured");
 			return;
 		}
 		assertTrue(board.getPlayer().getIsAtGoal(), "Player is not on goal but should be");
@@ -127,7 +128,7 @@ public class InterpreterTest {
 	@Test
 	public void testCanMove() {
 		if (!initInterpreter()) {
-			assertTrue(false, "Failed to init the interpreter");
+			fail("Failed to init the interpreter");
 			return;
 		}
 
