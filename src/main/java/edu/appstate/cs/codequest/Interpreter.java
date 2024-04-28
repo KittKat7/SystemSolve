@@ -111,11 +111,8 @@ public class Interpreter {
 				System.out.println(lines);
 
 				while (true) {
-					if (lines.get(0).startsWith("elihw"))
+					if (lines.get(0).trim().startsWith("elihw"))
 						break;
-					System.out.println(lines);
-					System.out.println("<" + lines.get(0) + ">");
-					System.out.println(lines.get(0) != "elihw");
 					parseLine();
 				}
 			}
