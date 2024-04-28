@@ -12,7 +12,7 @@ public class BoardTest {
     final static private int EXPECTEDWIDTH = 16;
 
     static private Board board;
-
+    
 	@Test
 	public void testTrue() {
         assertTrue(true, "This should never fail");
@@ -32,6 +32,28 @@ public class BoardTest {
     public void testCanMove()
     {
         board = new Board();
+
+        GameObject object  = new WallObject();
+        board.setObject(object, 0, 0);
+        GameObject goal = new GoalObject();
+        board.setObject(goal,0,1);
+        GameObject path = new PathObject();
+        board.setObject(path, 1,1);
+
+        int[][] testCases = {
+            {0, 0, 0},
+            {1, 0, 1},
+            {0, 1, 1},
+            {1, 1, 1}
+        };
+
+        for (int[] testCase : testCases) { 
+            int x = testCase[0];
+            int y = testCase[1];
+            int expected = testCase[2];
+            int returned = board.canMove(x,y) ? 1 : 0;
+            assertEquals(expected, returned);
+        }
 
     }
 
