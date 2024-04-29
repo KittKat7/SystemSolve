@@ -3,6 +3,7 @@ package edu.appstate.cs.codequest;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
@@ -51,6 +52,8 @@ public class App {
 		inputArea.setPreferredSize(new Dimension(350, 220));
 		inputArea.setMaximumSize(new Dimension(350, 220));
 		inputArea.setLineWrap(true);
+		inputArea.setTabSize(4);
+		inputArea.setFont(new Font(Font.MONOSPACED, Font.PLAIN, 12));
 
 		// Buttons for users to press
 		JButton submitButton = new JButton();
