@@ -42,6 +42,15 @@ public class Level {
 	}
 
 	/**
+	 * returns player object
+	 * @return player object
+	 */
+	public PlayerObject getPlayerObject()
+	{
+		return player;
+	}
+
+	/**
 	 * Runs the provided code.
 	 * 
 	 * @param str The code which is to be run.

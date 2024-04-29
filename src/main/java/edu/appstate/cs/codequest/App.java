@@ -100,7 +100,6 @@ public class App {
 		submitButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				String getInput = inputArea.getText();
-				System.out.print(getInput);
 				// Create a new thread for updating the movement to prevent locking the
 				// displaying.
 				Thread t1 = new Thread(new Runnable() {
@@ -111,15 +110,6 @@ public class App {
 				t1.start();
 			}
 		});
-	}
-
-	public static void isAtGoalRG(boolean bo) {
-		b = bo;
-	}
-
-	// returns user input as a string
-	public static String getInputString() {
-		return inputStr;
 	}
 
 	/**

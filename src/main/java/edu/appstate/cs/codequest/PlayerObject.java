@@ -32,6 +32,24 @@ public class PlayerObject extends GameObject {
 	}
 
 	/**
+	 * returns player x postion
+	 * @return int x
+	 */
+	public int getPlayerX()
+	{
+		return x;
+	}
+
+	/**
+	 * return player y position
+	 * @return int y
+	 */
+	public int getPlayerY()
+	{
+		return y;
+	}
+	
+	/**
 	 * Moves the player in the specified direction on the game board.
 	 * 
 	 * @param dir The Direction in which the player should move in.

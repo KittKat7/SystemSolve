@@ -24,16 +24,14 @@ public class DisplayBoard extends JPanel implements Runnable {
 	private final int screenWidth = tileSize * maxScreenCol; // 768 pixels aka 16 48x48 tiles
 	private final int screenHeight = tileSize * maxScreenRow; // 576 pixels aka 12 48x48 tiles
 	private final int FPS = 60;
-	Level level; // temporary
+	Level level;
 	private int index = 0;
-	static Boolean playerAtGoalB = false; // temporary
 	static Boolean button = false;
 	JButton levelButton = new JButton();
-	// Board obj and GameOnject array of objects
-	public Board board = new Board(maxScreenCol, maxScreenRow);
-
 	private JTextPane instructionsPane = new JTextPane();
 
+	// Board obj and GameOnject array of objects
+	public Board board = new Board(maxScreenCol, maxScreenRow);
 	Thread gameThread;
 
 	// Constructor that sets JPanel Parameters
@@ -111,7 +109,6 @@ public class DisplayBoard extends JPanel implements Runnable {
 			}
 
 			if (timer >= 1000000000) {
-				System.out.println("FPS: " + drawCount);
 				drawCount = 0;
 				timer = 0;
 			}
@@ -124,7 +121,7 @@ public class DisplayBoard extends JPanel implements Runnable {
 	 * 
 	 * @throws IOException
 	 */
-	private void update() throws IOException {
+	void update() throws IOException {
 		if (button == true) {
 			level = new Level(index);
 			board = level.getBoard();
