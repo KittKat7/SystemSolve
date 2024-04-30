@@ -2,9 +2,7 @@ package edu.appstate.cs.codequest;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.HashMap;
 import java.util.HashSet;
-import java.util.concurrent.TimeUnit;
 
 public class Interpreter {
 	private static final HashSet<String> KEYWORDS = new HashSet<String>(Arrays.asList(
@@ -59,6 +57,14 @@ public class Interpreter {
 		// Comment
 		if (line.startsWith("#") || line.isEmpty())
 			return;
+		// Admin commands
+		else if (line.startsWith("admin")) {
+			String adminCommand = line.substring("admin".length()).trim();
+			if (adminCommand == "setComplete") {
+				// level.setComplete(true);
+				// TODO
+			}
+		}
 		// Movement
 		else if (line.startsWith("move")) {
 			try {

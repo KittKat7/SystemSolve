@@ -8,6 +8,7 @@ public class Level {
 	private Board board;
 	private Interpreter interpreter;
 	private PlayerObject player;
+	private boolean levelComplete;
 
 	/**
 	 * Constructs a Level instance based on the provided level index. Loads the
@@ -24,20 +25,29 @@ public class Level {
 	}
 
 	/**
+	 * Sets the levelComplete variable.
+	 * 
+	 * @param b The new levelComplete value.
+	 */
+	public void setComplete(boolean b) {
+		levelComplete = b;
+	}
+
+	/**
 	 * Returns true if the player is at the goal, and false otherwise.
 	 * 
 	 * @return True if the player is at the goal, or false otherwise.
 	 */
 	public boolean getIsAtGoal() {
-		return player.getIsAtGoal();
+		return player.getIsAtGoal() || levelComplete;
 	}
 
 	/**
 	 * Returns the Level instance of board
+	 * 
 	 * @return board object
 	 */
-	public Board getBoard()
-	{
+	public Board getBoard() {
 		return board;
 	}
 
