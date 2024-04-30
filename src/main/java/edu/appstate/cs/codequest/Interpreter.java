@@ -56,12 +56,8 @@ public class Interpreter {
 		if (line.startsWith("#") || line.isEmpty())
 			return;
 		// Admin commands
-		else if (line.startsWith("admin")) {
-			String adminCommand = line.substring("admin".length()).trim();
-			if (adminCommand == "setComplete") {
-				// level.setComplete(true);
-				// TODO
-			}
+		else if (line.startsWith("adminLevelCompleteTrue")) {
+			Level.getLevel().setComplete(true);
 		}
 		// Movement
 		else if (line.startsWith("move")) {
