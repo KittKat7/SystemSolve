@@ -39,8 +39,6 @@ public class Interpreter {
 			}
 		} catch (Exception e) {
 			throw e;
-		} finally {
-			isInterpreting = false;
 		}
 	}// parse(String)
 
