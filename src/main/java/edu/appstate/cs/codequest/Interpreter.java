@@ -88,7 +88,7 @@ public class Interpreter {
 			// Remove the 'if ' and the ':'
 			boolean condition = parseCondition(
 					line.trim().substring(0, line.trim().length() - 1).substring("if ".length()));
-			while (!lines.get(0).startsWith("fi")) {
+			while (!lines.get(0).trim().startsWith("fi")) {
 				if (condition)
 					parseLine();
 				else
