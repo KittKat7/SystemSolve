@@ -40,7 +40,7 @@ public class DisplayBoard extends JPanel implements Runnable {
 		this.setBackground(Color.black);
 		this.setDoubleBuffered(true);
 		this.setFocusable(true);
-		level = new Level(index);
+		level = Level.newLevel(index);
 	}
 
 	// sets level
@@ -73,7 +73,7 @@ public class DisplayBoard extends JPanel implements Runnable {
 	public void startGame() throws IOException {
 		gameThread = new Thread(this);
 		gameThread.start();
-		level = new Level(index);
+		level = Level.newLevel(index);
 		board = level.getBoard();
 		instructionsPane.setText(App.getInstructions(index));
 	}
@@ -123,7 +123,7 @@ public class DisplayBoard extends JPanel implements Runnable {
 	 */
 	void update() throws IOException {
 		if (button == true) {
-			level = new Level(index);
+			level = Level.newLevel(index);
 			board = level.getBoard();
 			instructionsPane.setText(App.getInstructions(index));
 			button = false;

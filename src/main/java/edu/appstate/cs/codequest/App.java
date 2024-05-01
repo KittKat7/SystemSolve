@@ -49,8 +49,9 @@ public class App {
 
 		// Text area to allow user input. Set specific max size and linewrap
 		JTextArea inputArea = new JTextArea();
-		inputArea.setPreferredSize(new Dimension(350, 220));
-		inputArea.setMaximumSize(new Dimension(350, 220));
+		inputArea.setRows(13);
+		// inputArea.setPreferredSize(new Dimension(350, 220));
+		// inputArea.setMaximumSize(new Dimension(350, 220));
 		inputArea.setLineWrap(true);
 		inputArea.setTabSize(4);
 		inputArea.setFont(new Font(Font.MONOSPACED, Font.PLAIN, 12));
@@ -62,7 +63,9 @@ public class App {
 
 		// adds text area and submit button to panel
 		textAreaJPanel.setLayout(new BorderLayout());
-		textAreaJPanel.add(inputArea, BorderLayout.NORTH);
+		// textAreaJPanel.add(inputArea, BorderLayout.NORTH);
+		textAreaJPanel.add(new JScrollPane(inputArea, JScrollPane.VERTICAL_SCROLLBAR_ALWAYS,
+				JScrollPane.HORIZONTAL_SCROLLBAR_NEVER), BorderLayout.NORTH);
 		textAreaJPanel.add(submitButton, BorderLayout.CENTER);
 
 		// temporary until movement is done
@@ -82,7 +85,7 @@ public class App {
 
 		// adds instructions panel and text area panel to the top/botton of
 		// the split area
-		splitPane.setTopComponent(instructionsPane);
+		splitPane.setTopComponent(new JScrollPane(instructionsPane, JScrollPane.VERTICAL_SCROLLBAR_ALWAYS, 31));
 		splitPane.setBottomComponent(textAreaJPanel);
 
 		// sets a defined black border between the two areas

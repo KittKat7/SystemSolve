@@ -4,6 +4,8 @@ import java.io.IOException;
 
 public class Level {
 
+	private static Level level;
+
 	private int index;
 	private Board board;
 	private Interpreter interpreter;
@@ -14,14 +16,35 @@ public class Level {
 	 * Constructs a Level instance based on the provided level index. Loads the
 	 * board, and initializes the player and interpreter fields.
 	 * 
-	 * @param index
+	 * @param index The level index.
 	 * @throws IOException
 	 */
-	public Level(int index) throws IOException { // TODO: Handle IOException
+	private Level(int index) throws IOException { // TODO: Handle IOException
 		this.index = index;
 		board = Board.createBoardFromFile("level" + index);
 		player = board.getPlayer();
 		interpreter = new Interpreter(player, board);
+	}
+
+	/**
+	 * Gets the instance of the level.
+	 * 
+	 * @return The current level instance.
+	 */
+	public static Level getLevel() {
+		return level;
+	}
+
+	/**
+	 * Create a new level instance.
+	 * 
+	 * @param index The level index.
+	 * @return The new level instance.
+	 * @throws IOException
+	 */
+	public static Level newLevel(int index) throws IOException {
+		level = new Level(index);
+		return level;
 	}
 
 	/**
@@ -53,10 +76,10 @@ public class Level {
 
 	/**
 	 * returns player object
+	 * 
 	 * @return player object
 	 */
-	public PlayerObject getPlayerObject()
-	{
+	public PlayerObject getPlayerObject() {
 		return player;
 	}
 
