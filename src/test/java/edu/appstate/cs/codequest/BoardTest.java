@@ -139,7 +139,7 @@ public class BoardTest {
             assertTrue(board.getObject(7,11) instanceof PlayerObject);
 			assertTrue(board.getObject(7,0) instanceof GoalObject);
             //Test unique elements of level5 against level4 
-            assertFalse(board.getObject(7,6) instanceof PathObject);
+            assertFalse(board.getObject(7,8) instanceof PathObject);
             assertFalse(board.getObject(14,10) instanceof PathObject);
             assertFalse(board.getObject(1,1) instanceof PathObject);
 
