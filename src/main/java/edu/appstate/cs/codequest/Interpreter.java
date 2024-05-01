@@ -55,7 +55,7 @@ public class Interpreter {
 			// Handle admin commands
 			else if (line.startsWith("admin ")) {
 				switch (line.split(" ")[1]) {
-					case "setComplete":
+					case "forceComplete":
 						boolean condition = parseCondition(line.split(" ")[2]);
 						Level.getLevel().setComplete(condition);
 				}
