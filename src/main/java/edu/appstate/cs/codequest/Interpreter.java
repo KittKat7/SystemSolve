@@ -1,14 +1,9 @@
 package edu.appstate.cs.codequest;
 
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashSet;
 
 public class Interpreter {
-	private static final HashSet<String> KEYWORDS = new HashSet<String>(Arrays.asList(
-			"var", "while", "moveU", "moveD", "moveL", "moveR"));
 	private PlayerObject player;
-	private Board board;
 
 	private boolean isInterpreting;
 
@@ -16,7 +11,6 @@ public class Interpreter {
 
 	public Interpreter(PlayerObject player, Board board) {
 		this.player = player;
-		this.board = board;
 		isInterpreting = false;
 	}
 
@@ -33,95 +27,126 @@ public class Interpreter {
 			return;
 		try {
 			isInterpreting = true;
-			lines = new ArrayList<String>(Arrays.asList(str.split("\n")));
-			while (lines.size() > 0) {
-				parseLine();
-			}
+			String[] tmpAr = str.split("\n");
+			lines = new ArrayList<String>();
+			for (String tmpStr : tmpAr)
+				lines.add(tmpStr.trim());
+
+			// Run the code
+			parse(0, lines.size());
+
+			// while (lines.size() > 0) {
+			// parseLine();
+			// }
 		} catch (Exception e) {
 			throw e;
 		}
 	}// parse(String)
 
-	/**
-	 * Parses a single command. Returns an empty string or an error message if one
-	 * is thrown.
-	 * 
-	 * @param line The command to parse
-	 * @return Either an empty string, or an error message
-	 */
-	private void parseLine() throws InterpretingException {
-		String line = lines.get(0).trim();
-		lines.remove(0);
-		// Comment
-		if (line.startsWith("#") || line.isEmpty())
-			return;
-		// Admin commands
-		else if (line.startsWith("adminLevelCompleteTrue")) {
-			Level.getLevel().setComplete(true);
-		}
-		// Movement
-		else if (line.startsWith("move")) {
-			try {
-				Thread.sleep(500);
-			} catch (InterruptedException e) {
-				Thread.currentThread().interrupt();
+	private void parse(int start, int end) throws InterpretingException {
+		while (start < end) {
+			String line = lines.get(start);
+			// Handle comments and empty lines.
+			if (line.startsWith("#") || line.isEmpty()) {
+				start++;
+				continue;
 			}
-			switch (line.substring("move".length())) {
-				case "U":
-					player.move("up");
-					break;
-				case "D":
-					player.move("down");
-					break;
-				case "L":
-					player.move("left");
-					break;
-				case "R":
-					player.move("right");
-					break;
-				default:
-					throw new InterpretingException("Missing move direction, IE `moveU`");
-			}
-		}
-		// If statement
-		else if (line.startsWith("if ")) {
-			// Remove the 'if ' and the ':'
-			boolean condition = parseCondition(
-					line.trim().substring(0, line.trim().length() - 1).substring("if ".length()));
-			while (!lines.get(0).trim().startsWith("fi")) {
-				if (condition)
-					parseLine();
-				else
-					lines.remove(0);
-			}
-			lines.remove(0);
-		}
-		// While loop
-		else if (line.startsWith("while ")) {
-			// Remove the 'if ' and the ':'
-			String conditionStr = line.trim().substring(0, line.trim().length() - 1).substring("while ".length());
-			ArrayList<String> loopedcode = new ArrayList<String>();
-			while (!lines.get(0).startsWith("elihw")) {
-				loopedcode.add(lines.get(0));
-				lines.remove(0);
-			}
-			System.out.println("HELLO WORLD");
-			while (parseCondition(conditionStr)) {
-				lines.addAll(0, loopedcode);
-				System.out.println(lines);
 
-				while (true) {
-					if (lines.get(0).trim().startsWith("elihw"))
-						break;
-					parseLine();
+			// Handle admin commands
+			else if (line.startsWith("admin ")) {
+				switch (line.substring("admin ".length())) {
+					case "LevelCompleteTrue":
+						Level.getLevel().setComplete(true);
 				}
 			}
-			lines.remove(0);
+
+			// Handle movement
+			else if (line.startsWith("move")) {
+				try {
+					Thread.sleep(500);
+				} catch (InterruptedException e) {
+					Thread.currentThread().interrupt();
+				}
+				switch (line.substring("move".length())) {
+					case "U":
+						player.move("up");
+						break;
+					case "D":
+						player.move("down");
+						break;
+					case "L":
+						player.move("left");
+						break;
+					case "R":
+						player.move("right");
+						break;
+					default:
+						throw new InterpretingException("Missing move direction, IE `moveU`");
+				}
+			}
+
+			// Handle if
+			else if (line.startsWith("if ")) {
+				// Remove the 'if ' and the ':'
+				boolean condition = parseCondition(
+						line.substring(0, line.length() - 1).substring("if ".length()));
+				int fi = findEndIf(start, end);
+				if (condition) {
+					parse(start + 1, fi);
+				}
+				start = fi;
+			}
+
+			// Handle while
+			else if (line.startsWith("while ")) {
+				// Remove the 'if ' and the ':'
+				String conditionString = line.substring(0, line.length() - 1).substring("while ".length());
+				int elihw = findEndWhile(start, end);
+				while (parseCondition(conditionString)) {
+					parse(start + 1, elihw);
+				}
+				start = elihw;
+			}
+
+			// Else, throw exception
+			else
+				throw new InterpretingException("Unknown command '" + line + "'");
+
+			start++;
 		}
-		// Unknown
-		else
-			throw new InterpretingException("Unknown command '" + line + "'");
-	}// parseLine()
+	}
+
+	private int findEndIf(int start, int end) throws InterpretingException {
+		int cnt = 0;
+		int loc = start + 1;
+		while (!(lines.get(loc).startsWith("fi") && cnt == 0)) {
+			if (loc >= end)
+				throw new InterpretingException("LINE: " + start + " Unable to find closing fi");
+
+			if (lines.get(loc).startsWith("if "))
+				cnt++;
+			else if (lines.get(loc).startsWith("fi"))
+				cnt--;
+			loc++;
+		}
+		return loc;
+	}
+
+	private int findEndWhile(int start, int end) throws InterpretingException {
+		int cnt = 0;
+		int loc = start + 1;
+		while (!(lines.get(loc).startsWith("elihw") && cnt == 0)) {
+			if (loc >= end)
+				throw new InterpretingException("LINE: " + start + " Unable to find closing elihw");
+
+			if (lines.get(loc).startsWith("while "))
+				cnt++;
+			else if (lines.get(loc).startsWith("elihw"))
+				cnt--;
+			loc++;
+		}
+		return loc;
+	}
 
 	/**
 	 * Parses the passed condition, and returns true or false depending on the
