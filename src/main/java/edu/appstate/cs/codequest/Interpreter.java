@@ -54,9 +54,10 @@ public class Interpreter {
 
 			// Handle admin commands
 			else if (line.startsWith("admin ")) {
-				switch (line.substring("admin ".length())) {
-					case "LevelCompleteTrue":
-						Level.getLevel().setComplete(true);
+				switch (line.split(" ")[1]) {
+					case "setComplete":
+						boolean condition = parseCondition(line.split(" ")[2]);
+						Level.getLevel().setComplete(condition);
 				}
 			}
 
@@ -175,6 +176,12 @@ public class Interpreter {
 				break;
 			case "canMoveR":
 				condition = player.canMove('R');
+				break;
+			case "true":
+				condition = true;
+				break;
+			case "false":
+				condition = false;
 				break;
 			default:
 				throw new InterpretingException("Unknown condition `" + str + "`");
