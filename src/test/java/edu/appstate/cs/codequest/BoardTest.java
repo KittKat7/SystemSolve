@@ -113,7 +113,7 @@ public class BoardTest {
     public void testCreateBoardFromFile() {
         try {
             // Test level5
-            board = board.createBoardFromFile("level5");
+            board = Board.createBoardFromFile("level5");
 
             // Test Player and Goal position (should hold true for levels 1-5)
             assertTrue(board.getObject(7, 11) instanceof PlayerObject);
@@ -124,7 +124,7 @@ public class BoardTest {
             assertTrue(board.getObject(1, 1) instanceof PathObject);
 
             // For redundancy, test level4 as well
-            board = board.createBoardFromFile("level4");
+            board = Board.createBoardFromFile("level4");
 
             // Test Player and Goal position (should hold true for levels 1-5)
             assertTrue(board.getObject(7, 11) instanceof PlayerObject);
