@@ -1,11 +1,11 @@
-# Code Quest
+# System Solve
 
 ## Team Members
 
-* Avery Bowen
-* Daniel Ward
-* Gwendolyn Lockamy
+* Avery
+* Daniel
+* Gwendolyn
 
 ## Description
 
-Code Quest is a puzzle solving game designed to teach programming logic.
+System Solve is a puzzle solving game designed to teach programming logic.

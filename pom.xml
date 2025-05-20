@@ -2,14 +2,14 @@
   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
 
-  <groupId>edu.appstate.cs</groupId>
+  <groupId>xyz.kittkat</groupId>
   <!-- Update the project name. This should all be 1 word. -->
-  <artifactId>CodeQuest</artifactId>
+  <artifactId>SystemSolve</artifactId>
   <version>1.0-SNAPSHOT</version>
   <packaging>jar</packaging>
 
   <!-- Update the project name. This can be multiple words. -->
-  <name>Code Quest</name>
+  <name>System Solve</name>
   <url>http://maven.apache.org</url>
 
   <properties>
@@ -48,7 +48,7 @@
           <transformers>
             <transformer implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
               <!-- Update this to your actual entry point class name and package. -->
-              <mainClass>edu.appstate.cs.codequest.App</mainClass>
+              <mainClass>xyz.kittkat.systemsolve.App</mainClass>
             </transformer>
           </transformers>
         </configuration>
