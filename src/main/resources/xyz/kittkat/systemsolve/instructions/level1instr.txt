@@ -8,4 +8,4 @@ basic control over the computer, and can only
 communicate with direct instructions. 
 
 Please enter one of the following commands:
-MoveU, MoveD, MoveL, or MoveR
+moveU, moveD, moveL, or moveR
